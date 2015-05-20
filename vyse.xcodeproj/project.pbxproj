@@ -1,0 +1,424 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0F04A3B81B0D05FA00FDD33F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F04A3B71B0D05FA00FDD33F /* AppDelegate.swift */; };
+		0F04A3BA1B0D05FA00FDD33F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F04A3B91B0D05FA00FDD33F /* ViewController.swift */; };
+		0F04A3BD1B0D05FA00FDD33F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F04A3BB1B0D05FA00FDD33F /* Main.storyboard */; };
+		0F04A3BF1B0D05FA00FDD33F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F04A3BE1B0D05FA00FDD33F /* Images.xcassets */; };
+		0F04A3C21B0D05FA00FDD33F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F04A3C01B0D05FA00FDD33F /* LaunchScreen.xib */; };
+		0F04A3CE1B0D05FA00FDD33F /* vyseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F04A3CD1B0D05FA00FDD33F /* vyseTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0F04A3C81B0D05FA00FDD33F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0F04A3AA1B0D05FA00FDD33F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0F04A3B11B0D05FA00FDD33F;
+			remoteInfo = vyse;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0F04A3B21B0D05FA00FDD33F /* vyse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vyse.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F04A3B61B0D05FA00FDD33F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0F04A3B71B0D05FA00FDD33F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0F04A3B91B0D05FA00FDD33F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0F04A3BC1B0D05FA00FDD33F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0F04A3BE1B0D05FA00FDD33F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		0F04A3C11B0D05FA00FDD33F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		0F04A3C71B0D05FA00FDD33F /* vyseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = vyseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F04A3CC1B0D05FA00FDD33F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0F04A3CD1B0D05FA00FDD33F /* vyseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vyseTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0F04A3AF1B0D05FA00FDD33F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0F04A3C41B0D05FA00FDD33F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0F04A3A91B0D05FA00FDD33F = {
+			isa = PBXGroup;
+			children = (
+				0F04A3B41B0D05FA00FDD33F /* vyse */,
+				0F04A3CA1B0D05FA00FDD33F /* vyseTests */,
+				0F04A3B31B0D05FA00FDD33F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0F04A3B31B0D05FA00FDD33F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0F04A3B21B0D05FA00FDD33F /* vyse.app */,
+				0F04A3C71B0D05FA00FDD33F /* vyseTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0F04A3B41B0D05FA00FDD33F /* vyse */ = {
+			isa = PBXGroup;
+			children = (
+				0F04A3B71B0D05FA00FDD33F /* AppDelegate.swift */,
+				0F04A3B91B0D05FA00FDD33F /* ViewController.swift */,
+				0F04A3BB1B0D05FA00FDD33F /* Main.storyboard */,
+				0F04A3BE1B0D05FA00FDD33F /* Images.xcassets */,
+				0F04A3C01B0D05FA00FDD33F /* LaunchScreen.xib */,
+				0F04A3B51B0D05FA00FDD33F /* Supporting Files */,
+			);
+			path = vyse;
+			sourceTree = "<group>";
+		};
+		0F04A3B51B0D05FA00FDD33F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0F04A3B61B0D05FA00FDD33F /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0F04A3CA1B0D05FA00FDD33F /* vyseTests */ = {
+			isa = PBXGroup;
+			children = (
+				0F04A3CD1B0D05FA00FDD33F /* vyseTests.swift */,
+				0F04A3CB1B0D05FA00FDD33F /* Supporting Files */,
+			);
+			path = vyseTests;
+			sourceTree = "<group>";
+		};
+		0F04A3CB1B0D05FA00FDD33F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0F04A3CC1B0D05FA00FDD33F /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0F04A3B11B0D05FA00FDD33F /* vyse */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0F04A3D11B0D05FA00FDD33F /* Build configuration list for PBXNativeTarget "vyse" */;
+			buildPhases = (
+				0F04A3AE1B0D05FA00FDD33F /* Sources */,
+				0F04A3AF1B0D05FA00FDD33F /* Frameworks */,
+				0F04A3B01B0D05FA00FDD33F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = vyse;
+			productName = vyse;
+			productReference = 0F04A3B21B0D05FA00FDD33F /* vyse.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0F04A3C61B0D05FA00FDD33F /* vyseTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0F04A3D41B0D05FA00FDD33F /* Build configuration list for PBXNativeTarget "vyseTests" */;
+			buildPhases = (
+				0F04A3C31B0D05FA00FDD33F /* Sources */,
+				0F04A3C41B0D05FA00FDD33F /* Frameworks */,
+				0F04A3C51B0D05FA00FDD33F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0F04A3C91B0D05FA00FDD33F /* PBXTargetDependency */,
+			);
+			name = vyseTests;
+			productName = vyseTests;
+			productReference = 0F04A3C71B0D05FA00FDD33F /* vyseTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0F04A3AA1B0D05FA00FDD33F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = Stratazima;
+				TargetAttributes = {
+					0F04A3B11B0D05FA00FDD33F = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					0F04A3C61B0D05FA00FDD33F = {
+						CreatedOnToolsVersion = 6.3.2;
+						TestTargetID = 0F04A3B11B0D05FA00FDD33F;
+					};
+				};
+			};
+			buildConfigurationList = 0F04A3AD1B0D05FA00FDD33F /* Build configuration list for PBXProject "vyse" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0F04A3A91B0D05FA00FDD33F;
+			productRefGroup = 0F04A3B31B0D05FA00FDD33F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0F04A3B11B0D05FA00FDD33F /* vyse */,
+				0F04A3C61B0D05FA00FDD33F /* vyseTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0F04A3B01B0D05FA00FDD33F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F04A3BD1B0D05FA00FDD33F /* Main.storyboard in Resources */,
+				0F04A3C21B0D05FA00FDD33F /* LaunchScreen.xib in Resources */,
+				0F04A3BF1B0D05FA00FDD33F /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0F04A3C51B0D05FA00FDD33F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0F04A3AE1B0D05FA00FDD33F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F04A3BA1B0D05FA00FDD33F /* ViewController.swift in Sources */,
+				0F04A3B81B0D05FA00FDD33F /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0F04A3C31B0D05FA00FDD33F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F04A3CE1B0D05FA00FDD33F /* vyseTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0F04A3C91B0D05FA00FDD33F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0F04A3B11B0D05FA00FDD33F /* vyse */;
+			targetProxy = 0F04A3C81B0D05FA00FDD33F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0F04A3BB1B0D05FA00FDD33F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0F04A3BC1B0D05FA00FDD33F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0F04A3C01B0D05FA00FDD33F /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0F04A3C11B0D05FA00FDD33F /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0F04A3CF1B0D05FA00FDD33F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		0F04A3D01B0D05FA00FDD33F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0F04A3D21B0D05FA00FDD33F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = vyse/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		0F04A3D31B0D05FA00FDD33F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = vyse/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		0F04A3D51B0D05FA00FDD33F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = vyseTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/vyse.app/vyse";
+			};
+			name = Debug;
+		};
+		0F04A3D61B0D05FA00FDD33F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = vyseTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/vyse.app/vyse";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0F04A3AD1B0D05FA00FDD33F /* Build configuration list for PBXProject "vyse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0F04A3CF1B0D05FA00FDD33F /* Debug */,
+				0F04A3D01B0D05FA00FDD33F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0F04A3D11B0D05FA00FDD33F /* Build configuration list for PBXNativeTarget "vyse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0F04A3D21B0D05FA00FDD33F /* Debug */,
+				0F04A3D31B0D05FA00FDD33F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		0F04A3D41B0D05FA00FDD33F /* Build configuration list for PBXNativeTarget "vyseTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0F04A3D51B0D05FA00FDD33F /* Debug */,
+				0F04A3D61B0D05FA00FDD33F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0F04A3AA1B0D05FA00FDD33F /* Project object */;
+}
