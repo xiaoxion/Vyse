@@ -13,6 +13,30 @@
 		0F04A3BF1B0D05FA00FDD33F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F04A3BE1B0D05FA00FDD33F /* Images.xcassets */; };
 		0F04A3C21B0D05FA00FDD33F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F04A3C01B0D05FA00FDD33F /* LaunchScreen.xib */; };
 		0F04A3CE1B0D05FA00FDD33F /* vyseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F04A3CD1B0D05FA00FDD33F /* vyseTests.swift */; };
+		0F04A3DA1B0D07BF00FDD33F /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F04A3D91B0D07BF00FDD33F /* NavigationController.swift */; };
+		0F04A3E01B0D334800FDD33F /* Lamb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F04A3DF1B0D334800FDD33F /* Lamb.jpg */; };
+		0F04A3E31B0D47D900FDD33F /* Vyse.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F04A3E21B0D47D900FDD33F /* Vyse.png */; };
+		0F63EFD41B156ADD009605A6 /* Male50.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F63EFD31B156ADD009605A6 /* Male50.png */; };
+		0FC7681C1B17B62E00A3AD7E /* VyseSquareButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FC7681B1B17B62E00A3AD7E /* VyseSquareButton.png */; };
+		0FC7681F1B17B78200A3AD7E /* like_filled-25.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FC7681D1B17B78200A3AD7E /* like_filled-25.png */; };
+		0FC768201B17B78200A3AD7E /* save_as_filled-25.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FC7681E1B17B78200A3AD7E /* save_as_filled-25.png */; };
+		0FF6D6501B16207C0096E0B2 /* VyseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF6D64F1B16207C0096E0B2 /* VyseViewController.swift */; };
+		0FF6D6521B16215C0096E0B2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF6D6511B16215C0096E0B2 /* LoginViewController.swift */; };
+		0FF6D6541B1662760096E0B2 /* MainBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF6D6531B1662760096E0B2 /* MainBackground.png */; };
+		0FF6D6561B1663B80096E0B2 /* location_filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF6D6551B1663B80096E0B2 /* location_filled-100.png */; };
+		0FF6D6581B166A580096E0B2 /* VyseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF6D6571B166A580096E0B2 /* VyseButton.png */; };
+		0FF6D65A1B167D330096E0B2 /* VyseSubBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF6D6591B167D330096E0B2 /* VyseSubBackground.png */; };
+		0FF6D65C1B16CF750096E0B2 /* Instagram-Food.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0FF6D65B1B16CF750096E0B2 /* Instagram-Food.jpg */; };
+		0FF6D6641B16D2670096E0B2 /* thumb_up-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF6D65E1B16D2670096E0B2 /* thumb_up-50.png */; };
+		0FF6D6651B16D2670096E0B2 /* thumb_up_filled-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF6D65F1B16D2670096E0B2 /* thumb_up_filled-50.png */; };
+		0FF6D6661B16D2670096E0B2 /* save_as-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF6D6601B16D2670096E0B2 /* save_as-50.png */; };
+		0FF6D6671B16D2670096E0B2 /* like_filled-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF6D6611B16D2670096E0B2 /* like_filled-50.png */; };
+		0FF6D6681B16D2670096E0B2 /* save_as_filled-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF6D6621B16D2670096E0B2 /* save_as_filled-50.png */; };
+		0FF6D6691B16D2670096E0B2 /* like-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF6D6631B16D2670096E0B2 /* like-50.png */; };
+		0FF6D9911B1802CD00080C4D /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF6D9901B1802CD00080C4D /* FoodCell.swift */; };
+		0FF6D9931B18098800080C4D /* gourmet-food-photography-collage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0FF6D9921B18098800080C4D /* gourmet-food-photography-collage.jpg */; };
+		0FFB0E591B15055400DAC93A /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFB0E581B15055400DAC93A /* ListViewController.swift */; };
+		23BAE2804A8EAC560D80E216 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71467DA081B9D475073FBD3A /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +60,33 @@
 		0F04A3C71B0D05FA00FDD33F /* vyseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = vyseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F04A3CC1B0D05FA00FDD33F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F04A3CD1B0D05FA00FDD33F /* vyseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vyseTests.swift; sourceTree = "<group>"; };
+		0F04A3D91B0D07BF00FDD33F /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		0F04A3DF1B0D334800FDD33F /* Lamb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Lamb.jpg; sourceTree = "<group>"; };
+		0F04A3E21B0D47D900FDD33F /* Vyse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Vyse.png; sourceTree = "<group>"; };
+		0F63EFD31B156ADD009605A6 /* Male50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Male50.png; sourceTree = "<group>"; };
+		0FC7681A1B17844600A3AD7E /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		0FC7681B1B17B62E00A3AD7E /* VyseSquareButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VyseSquareButton.png; sourceTree = "<group>"; };
+		0FC7681D1B17B78200A3AD7E /* like_filled-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "like_filled-25.png"; sourceTree = "<group>"; };
+		0FC7681E1B17B78200A3AD7E /* save_as_filled-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save_as_filled-25.png"; sourceTree = "<group>"; };
+		0FF6D64F1B16207C0096E0B2 /* VyseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VyseViewController.swift; sourceTree = "<group>"; };
+		0FF6D6511B16215C0096E0B2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		0FF6D6531B1662760096E0B2 /* MainBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MainBackground.png; sourceTree = "<group>"; };
+		0FF6D6551B1663B80096E0B2 /* location_filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location_filled-100.png"; sourceTree = "<group>"; };
+		0FF6D6571B166A580096E0B2 /* VyseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VyseButton.png; sourceTree = "<group>"; };
+		0FF6D6591B167D330096E0B2 /* VyseSubBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VyseSubBackground.png; sourceTree = "<group>"; };
+		0FF6D65B1B16CF750096E0B2 /* Instagram-Food.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Instagram-Food.jpg"; sourceTree = "<group>"; };
+		0FF6D65E1B16D2670096E0B2 /* thumb_up-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb_up-50.png"; sourceTree = "<group>"; };
+		0FF6D65F1B16D2670096E0B2 /* thumb_up_filled-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb_up_filled-50.png"; sourceTree = "<group>"; };
+		0FF6D6601B16D2670096E0B2 /* save_as-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save_as-50.png"; sourceTree = "<group>"; };
+		0FF6D6611B16D2670096E0B2 /* like_filled-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "like_filled-50.png"; sourceTree = "<group>"; };
+		0FF6D6621B16D2670096E0B2 /* save_as_filled-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "save_as_filled-50.png"; sourceTree = "<group>"; };
+		0FF6D6631B16D2670096E0B2 /* like-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "like-50.png"; sourceTree = "<group>"; };
+		0FF6D9901B1802CD00080C4D /* FoodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
+		0FF6D9921B18098800080C4D /* gourmet-food-photography-collage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "gourmet-food-photography-collage.jpg"; sourceTree = "<group>"; };
+		0FFB0E581B15055400DAC93A /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		71467DA081B9D475073FBD3A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3FD3949FD18AAA02A945422 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		AB246143725B86B3EE76A431 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23BAE2804A8EAC560D80E216 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +114,8 @@
 				0F04A3B41B0D05FA00FDD33F /* vyse */,
 				0F04A3CA1B0D05FA00FDD33F /* vyseTests */,
 				0F04A3B31B0D05FA00FDD33F /* Products */,
+				D6AAF7E0E1D28E225F3291D6 /* Pods */,
+				A1F2461F17F993EA60084819 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,8 +131,14 @@
 		0F04A3B41B0D05FA00FDD33F /* vyse */ = {
 			isa = PBXGroup;
 			children = (
+				0F04A3E11B0D334C00FDD33F /* image */,
 				0F04A3B71B0D05FA00FDD33F /* AppDelegate.swift */,
+				0F04A3D91B0D07BF00FDD33F /* NavigationController.swift */,
 				0F04A3B91B0D05FA00FDD33F /* ViewController.swift */,
+				0FF6D6511B16215C0096E0B2 /* LoginViewController.swift */,
+				0FF6D64F1B16207C0096E0B2 /* VyseViewController.swift */,
+				0FFB0E581B15055400DAC93A /* ListViewController.swift */,
+				0FF6D9901B1802CD00080C4D /* FoodCell.swift */,
 				0F04A3BB1B0D05FA00FDD33F /* Main.storyboard */,
 				0F04A3BE1B0D05FA00FDD33F /* Images.xcassets */,
 				0F04A3C01B0D05FA00FDD33F /* LaunchScreen.xib */,
@@ -91,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				0F04A3B61B0D05FA00FDD33F /* Info.plist */,
+				0FC7681A1B17844600A3AD7E /* BridgingHeader.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -112,6 +173,56 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0F04A3E11B0D334C00FDD33F /* image */ = {
+			isa = PBXGroup;
+			children = (
+				0FF6D65D1B16D2480096E0B2 /* buttons */,
+				0FF6D65B1B16CF750096E0B2 /* Instagram-Food.jpg */,
+				0FF6D9921B18098800080C4D /* gourmet-food-photography-collage.jpg */,
+				0FF6D6551B1663B80096E0B2 /* location_filled-100.png */,
+				0FF6D6571B166A580096E0B2 /* VyseButton.png */,
+				0FF6D6531B1662760096E0B2 /* MainBackground.png */,
+				0FF6D6591B167D330096E0B2 /* VyseSubBackground.png */,
+				0F63EFD31B156ADD009605A6 /* Male50.png */,
+				0F04A3E21B0D47D900FDD33F /* Vyse.png */,
+				0F04A3DF1B0D334800FDD33F /* Lamb.jpg */,
+			);
+			name = image;
+			sourceTree = "<group>";
+		};
+		0FF6D65D1B16D2480096E0B2 /* buttons */ = {
+			isa = PBXGroup;
+			children = (
+				0FC7681D1B17B78200A3AD7E /* like_filled-25.png */,
+				0FC7681E1B17B78200A3AD7E /* save_as_filled-25.png */,
+				0FC7681B1B17B62E00A3AD7E /* VyseSquareButton.png */,
+				0FF6D65E1B16D2670096E0B2 /* thumb_up-50.png */,
+				0FF6D65F1B16D2670096E0B2 /* thumb_up_filled-50.png */,
+				0FF6D6601B16D2670096E0B2 /* save_as-50.png */,
+				0FF6D6611B16D2670096E0B2 /* like_filled-50.png */,
+				0FF6D6621B16D2670096E0B2 /* save_as_filled-50.png */,
+				0FF6D6631B16D2670096E0B2 /* like-50.png */,
+			);
+			name = buttons;
+			sourceTree = "<group>";
+		};
+		A1F2461F17F993EA60084819 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				71467DA081B9D475073FBD3A /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D6AAF7E0E1D28E225F3291D6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AB246143725B86B3EE76A431 /* Pods.debug.xcconfig */,
+				A3FD3949FD18AAA02A945422 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,9 +230,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0F04A3D11B0D05FA00FDD33F /* Build configuration list for PBXNativeTarget "vyse" */;
 			buildPhases = (
+				E8B1580A0A4C480F2B5DC21D /* Check Pods Manifest.lock */,
 				0F04A3AE1B0D05FA00FDD33F /* Sources */,
 				0F04A3AF1B0D05FA00FDD33F /* Frameworks */,
 				0F04A3B01B0D05FA00FDD33F /* Resources */,
+				1791DBE4414B0297990C665C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -161,6 +274,7 @@
 				TargetAttributes = {
 					0F04A3B11B0D05FA00FDD33F = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = 9Y7XAUJ9RA;
 					};
 					0F04A3C61B0D05FA00FDD33F = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -192,9 +306,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FF6D6561B1663B80096E0B2 /* location_filled-100.png in Resources */,
+				0FF6D65C1B16CF750096E0B2 /* Instagram-Food.jpg in Resources */,
 				0F04A3BD1B0D05FA00FDD33F /* Main.storyboard in Resources */,
+				0FC7681C1B17B62E00A3AD7E /* VyseSquareButton.png in Resources */,
 				0F04A3C21B0D05FA00FDD33F /* LaunchScreen.xib in Resources */,
+				0FF6D6691B16D2670096E0B2 /* like-50.png in Resources */,
+				0FF6D9931B18098800080C4D /* gourmet-food-photography-collage.jpg in Resources */,
+				0FF6D6671B16D2670096E0B2 /* like_filled-50.png in Resources */,
+				0FF6D6641B16D2670096E0B2 /* thumb_up-50.png in Resources */,
+				0FC7681F1B17B78200A3AD7E /* like_filled-25.png in Resources */,
+				0F04A3E31B0D47D900FDD33F /* Vyse.png in Resources */,
+				0F63EFD41B156ADD009605A6 /* Male50.png in Resources */,
+				0FF6D6661B16D2670096E0B2 /* save_as-50.png in Resources */,
+				0FF6D6541B1662760096E0B2 /* MainBackground.png in Resources */,
 				0F04A3BF1B0D05FA00FDD33F /* Images.xcassets in Resources */,
+				0FF6D6681B16D2670096E0B2 /* save_as_filled-50.png in Resources */,
+				0FF6D6581B166A580096E0B2 /* VyseButton.png in Resources */,
+				0F04A3E01B0D334800FDD33F /* Lamb.jpg in Resources */,
+				0FC768201B17B78200A3AD7E /* save_as_filled-25.png in Resources */,
+				0FF6D65A1B167D330096E0B2 /* VyseSubBackground.png in Resources */,
+				0FF6D6651B16D2670096E0B2 /* thumb_up_filled-50.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,12 +339,50 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1791DBE4414B0297990C665C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E8B1580A0A4C480F2B5DC21D /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0F04A3AE1B0D05FA00FDD33F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FF6D6521B16215C0096E0B2 /* LoginViewController.swift in Sources */,
+				0FF6D6501B16207C0096E0B2 /* VyseViewController.swift in Sources */,
+				0FF6D9911B1802CD00080C4D /* FoodCell.swift in Sources */,
 				0F04A3BA1B0D05FA00FDD33F /* ViewController.swift in Sources */,
+				0F04A3DA1B0D07BF00FDD33F /* NavigationController.swift in Sources */,
+				0FFB0E591B15055400DAC93A /* ListViewController.swift in Sources */,
 				0F04A3B81B0D05FA00FDD33F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -338,8 +508,10 @@
 		};
 		0F04A3D21B0D05FA00FDD33F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AB246143725B86B3EE76A431 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = vyse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -348,8 +520,10 @@
 		};
 		0F04A3D31B0D05FA00FDD33F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A3FD3949FD18AAA02A945422 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = vyse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -409,6 +583,7 @@
 				0F04A3D31B0D05FA00FDD33F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0F04A3D41B0D05FA00FDD33F /* Build configuration list for PBXNativeTarget "vyseTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +592,7 @@
 				0F04A3D61B0D05FA00FDD33F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
