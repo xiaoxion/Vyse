@@ -15,8 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        let client = Client(clientID: "WPSRSPOVDB3RQW0ATUNCHDR5JDIWVY0Y4CZTJANIYWJ4WDXP",
+                     clientSecret:    "22PYSCY2L5TP2NYB2BPV5SBUUOWN1MGBULKO5UTT5VA4T1C2",
+                     redirectURL:    "vyse://foursquare")
+        var configuration = Configuration(client:client)
+        configuration.shouldControllNetworkActivityIndicator = true
+        Session.setupSharedSessionWithConfiguration(configuration)
+        
         return true
+    }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation:  AnyObject?) -> Bool {
+        return Session.sharedSession().handleURL(url)
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -40,7 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    
+    
 
 }
 

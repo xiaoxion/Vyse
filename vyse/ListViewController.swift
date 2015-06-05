@@ -9,20 +9,60 @@
 import UIKit
 
 class ListViewController: UITableViewController {
-    let restaurants = [["9.3 Italian Restaurant #1", "Open until 4:00PM"], ["9.2 Italian Place", "Open until 10:00PM"], ["8.7 The Italians", "Open Untill 9:00PM"], ["8.2 Little Italy", "Open Untill 2:00AM"], ["8.1 Italian Restaurant #2", "Open Untill 4:00PM"]]
-    
+    var session: Session!
+    var venues: [[String:AnyObject]]!
     var indexedPath: NSIndexPath!
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return restaurants.count
+        if venues == nil {
+            return 0
+        }
+        return venues.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> FoodCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as! FoodCell
-        let object = restaurants[indexPath.row]
+        let object = venues![indexPath.row] as JSONParameters!
+        let objectVenue = object["venue"] as? JSONParameters
         
-        cell.mainLabel.text = object[0]
-        cell.subLabel.text = object[1]
+        var miniInt:NSNumber? = objectVenue!["rating"] as? NSNumber
+        if miniInt == nil {
+            miniInt = 0
+        }
+        var hours = objectVenue!["hours"] as? JSONParameters
+        var hoursString = "Closed Now"
+        
+        if hours != nil {
+            if hours!["isOpen"] as! Bool {
+                hoursString = "Open Now"
+            }
+            
+            if hours!["status"] != nil {
+                hoursString = hours!["status"] as! String
+            }
+        } else {
+            hoursString = "Hours Unknown"
+        }
+        
+        var objectPhotos: JSONParameters? = objectVenue!["featuredPhotos"] as? JSONParameters
+    
+        if objectPhotos != nil {
+            
+            var objectPhotoItem = objectPhotos!["items"] as? [JSONParameters]
+            var ObjectFirstPhoto = objectPhotoItem![0] as JSONParameters
+            var imageString = (ObjectFirstPhoto["prefix"] as? String)! + "100x100" + (ObjectFirstPhoto["suffix"] as? String)!
+            let url = NSURL(string: imageString)
+        
+            getDataFromUrl(url!) { data in
+                dispatch_async(dispatch_get_main_queue()) {
+                    cell.imageView!.image = UIImage(data: data!)
+                }
+            }
+        }
+        
+        
+        cell.mainLabel.text = prefix(miniInt!.stringValue, 3) + " " + (objectVenue!["name"] as? String)!
+        cell.subLabel.text = hoursString
         
         return cell
     }
@@ -35,12 +75,14 @@ class ListViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         var segued = segue.destinationViewController as! VyseViewController
         
-        segued.ifRecieving = true;
-        
-        var string1 = restaurants[indexedPath.row][0]
-        var index = advance(string1.startIndex, 4);
-        
-        segued.dataOne = string1.substringFromIndex(index)
-        segued.dataTwo = restaurants[indexedPath.row][1]
+        segued.ifRecieving = true
+        segued.venueObject = venues!
+        segued.indexedPath = indexedPath!
+    }
+    
+    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
+            completion(data: NSData(data: data))
+            }.resume()
     }
 }

@@ -20,16 +20,34 @@ class VyseViewController:UIViewController {
     @IBOutlet weak var restaurantTime: UILabel!
     
     var ifRecieving: Bool = false
-    var dataOne: String!
-    var dataTwo: String!
+    var indexedPath: NSIndexPath!
+    var venueObject: [[String:AnyObject]]!
+    var currentValue: Int!
     
     override func viewDidLoad() {
         addLogoToTitleBar()
         addGestureRecognizers()
         
         if ifRecieving {
-            restaurantName.text = dataOne
-            restaurantTime.text = dataTwo
+            currentValue = indexedPath.row
+            let object = venueObject![currentValue] as JSONParameters!
+            let objectVenue = object["venue"] as? JSONParameters
+            
+            var hours = objectVenue!["hours"] as? JSONParameters
+            var hoursString = "Closed Now"
+            
+            if hours != nil {
+                if hours!["isOpen"] as! Bool {
+                    hoursString = "Open Now"
+                }
+            } else {
+                hoursString = "Hours Unknown"
+            }
+            
+            restaurantName.text = objectVenue!["name"] as? String
+            restaurantTime.text = hoursString
+        } else {
+            
         }
     }
     
@@ -50,6 +68,11 @@ class VyseViewController:UIViewController {
     func swipeHandler(sender: UISwipeGestureRecognizer) {
         if sender.direction == .Right {
             UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {
+                if self.currentValue < self.venueObject.count {
+                    self.currentValue = self.currentValue + 1
+                } else {
+                    
+                }
                 self.mainTopContraint.constant = 8
                 self.subTopConstraint.constant = 300
                 self.leftMainView.constant = 509
