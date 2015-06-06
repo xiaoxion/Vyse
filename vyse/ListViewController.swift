@@ -7,77 +7,70 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class ListViewController: UITableViewController {
-    var session: Session!
-    var venues: [[String:AnyObject]]!
-    var indexedPath: NSIndexPath!
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if venues == nil {
+        if sharedFoursquareProcesses.venues == nil {
             return 0
         }
-        return venues.count
+        return sharedFoursquareProcesses.venues.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> FoodCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as! FoodCell
-        let object = venues![indexPath.row] as JSONParameters!
-        let objectVenue = object["venue"] as? JSONParameters
+        let objectVenue: JSON? = sharedFoursquareProcesses.venues[indexPath.row]["venue"]
         
-        var miniInt:NSNumber? = objectVenue!["rating"] as? NSNumber
-        if miniInt == nil {
-            miniInt = 0
+        var ratingString: String
+        
+        if let ratingNumber = objectVenue?["rating"].number {
+            ratingString = prefix(ratingNumber.stringValue, 3)
+        } else {
+            ratingString = "?.?"
         }
-        var hours = objectVenue!["hours"] as? JSONParameters
+        
         var hoursString = "Closed Now"
         
-        if hours != nil {
-            if hours!["isOpen"] as! Bool {
+        if let hours = objectVenue?["hours"] {
+            if hours["isOpen"].boolValue {
                 hoursString = "Open Now"
             }
             
-            if hours!["status"] != nil {
-                hoursString = hours!["status"] as! String
+            if hours["status"] != nil {
+                hoursString = hours["status"].stringValue
             }
         } else {
             hoursString = "Hours Unknown"
         }
         
-        var objectPhotos: JSONParameters? = objectVenue!["featuredPhotos"] as? JSONParameters
-    
-        if objectPhotos != nil {
-            
-            var objectPhotoItem = objectPhotos!["items"] as? [JSONParameters]
-            var ObjectFirstPhoto = objectPhotoItem![0] as JSONParameters
-            var imageString = (ObjectFirstPhoto["prefix"] as? String)! + "100x100" + (ObjectFirstPhoto["suffix"] as? String)!
-            let url = NSURL(string: imageString)
         
+        if let venuePhoto = objectVenue?["featuredPhotos"]["items"][0].dictionary {
+            var imageString = venuePhoto["prefix"]!.string! + "100x100" + venuePhoto["suffix"]!.string!
+            let url = NSURL(string: imageString)
+            
             getDataFromUrl(url!) { data in
                 dispatch_async(dispatch_get_main_queue()) {
                     cell.imageView!.image = UIImage(data: data!)
                 }
             }
+        } else {
+            cell.imageView!.image = UIImage(named: "MainBackground.png")
         }
         
-        
-        cell.mainLabel.text = prefix(miniInt!.stringValue, 3) + " " + (objectVenue!["name"] as? String)!
+        cell.mainLabel.text = ratingString + " " + (objectVenue?["name"].string)!
         cell.subLabel.text = hoursString
         
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        indexedPath = indexPath
+        sharedFoursquareProcesses.indexedPath = indexPath.row
         self.performSegueWithIdentifier("SearchVyseSegue", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         var segued = segue.destinationViewController as! VyseViewController
-        
-        segued.ifRecieving = true
-        segued.venueObject = venues!
-        segued.indexedPath = indexedPath!
     }
     
     func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {

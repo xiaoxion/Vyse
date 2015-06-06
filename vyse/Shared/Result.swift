@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 public let QuadratResponseErrorDomain   = "QuadratOauthErrorDomain"
 public let QuadratResponseErrorTypeKey  = "errorType"
@@ -51,7 +52,7 @@ public class Result: Printable {
         Can be empty in case of error or `multi` request. 
         If you are doung `multi` request use `subresponses` property
     */
-    public var response         : [String:AnyObject]?
+    public var response         : JSON?
     
     /** 
         Responses returned from `multi` endpoint. Subresponses never have HTTP headers and status code.
@@ -62,7 +63,7 @@ public class Result: Printable {
     /** 
         A notifications. Extracted from JSON `notifications` field.
     */
-    public var notifications    : [[String:AnyObject]]?
+    public var notifications    : JSON?
     
     init() {
         
@@ -78,7 +79,7 @@ public class Result: Printable {
 /** Response creation from HTTP response. */
 extension Result {
     
-    class func createResult(HTTPResponse: NSHTTPURLResponse?, JSON: [String:AnyObject]?, error: NSError? ) -> Result {
+    class func createResult(HTTPResponse: NSHTTPURLResponse?, Data: JSON? , error: NSError? ) -> Result {
         let result = Result()
         if HTTPResponse != nil {
             result.HTTPHeaders     = HTTPResponse!.allHeaderFields
@@ -86,28 +87,15 @@ extension Result {
             result.URL             = HTTPResponse!.URL
         }
         
-        if JSON != nil {
-            if let meta = JSON!["meta"] as? [String:AnyObject] {
-                if let code = meta["code"] as? Int {
+        if Data != nil {
+            if let code = Data?["meta"]["code"].int {
                     if code < 200 || code > 299 {
-                        result.error = NSError(domain: QuadratResponseErrorDomain, code: code, userInfo: meta)
-                    }
+                        result.error = NSError(domain: QuadratResponseErrorDomain, code: code, userInfo: Data?["meta"].dictionaryObject)
                 }
             }
-            result.notifications   = JSON!["notifications"]   as? [[String:AnyObject]]
-            result.response        = JSON!["response"]        as? [String:AnyObject]
             
-            if result.response != nil {
-                if let responses = result.response!["responses"] as? [[String:AnyObject]] {
-                    var subResults = [Result]()
-                    for aJSONResponse in responses {
-                        let quatratResponse = Result.createResult(nil, JSON: aJSONResponse, error: nil)
-                        subResults.append(quatratResponse)
-                    }
-                    result.results = subResults
-                    result.response = nil
-                }
-            }
+            result.notifications   = Data!["notifications"]
+            result.response        = Data!["response"]
         }
         
         if error != nil {
@@ -118,16 +106,14 @@ extension Result {
     
     class func resultFromURLSessionResponse(response:NSURLResponse?, data: NSData?, error: NSError?) -> Result {
         let HTTPResponse = response as? NSHTTPURLResponse
-        var JSONResult: [String: AnyObject]?
+        var JSONResult: JSON?
         var JSONError = error
         
         if data != nil && JSONError == nil && HTTPResponse?.MIMEType == "application/json" {
-            let object: AnyObject? = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions(0), error: &JSONError)
-            if object != nil {
-                JSONResult = object as? [String: AnyObject]
-            }
+            JSONResult = JSON(data: data!)
         }
-        let result = Result.createResult(HTTPResponse, JSON: JSONResult, error: JSONError)
+        
+        let result = Result.createResult(HTTPResponse, Data: JSONResult, error: JSONError)
         return result
     }
 }

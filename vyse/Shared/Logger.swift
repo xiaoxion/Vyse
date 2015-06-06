@@ -33,7 +33,7 @@ public class ConsoleLogger: Logger {
     public func session(session: Session, didReceiveResult result: Result) {
         println("")
         println("Session did receive response:  \(result.HTTPSTatusCode), \(result.URL)")
-        if let warning = result.response?["warning"] as? [String: AnyObject] {
+        if let warning = result.response?["warning"].dictionaryObject {
             if let text = warning["text"] as? String {
                 println("Warning: \(text)")
             }

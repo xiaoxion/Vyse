@@ -11,17 +11,12 @@ import UIKit
 import CoreLocation
 import MapKit
 
-typealias JSONParameters = [String: AnyObject]
-
-class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, CLLocationManagerDelegate, SessionAuthorizationDelegate {
+class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, CLLocationManagerDelegate, SessionAuthorizationDelegate, UITextFieldDelegate {
     @IBOutlet weak var myPicker: UIPickerView!
     @IBOutlet weak var locationText: UITextField!
     @IBOutlet weak var priceControl: UISegmentedControl!
     
-    var session: Session!
-    var currentTask: Task?
     var locationManager: CLLocationManager!
-    var venues: [[String:AnyObject]]!
     
     let distanceFormatter = MKDistanceFormatter()
     let pickerData = [["Mexican","Chinese","American","Japanese","Italian"]]
@@ -29,12 +24,19 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        locationText.delegate = self
+        
         addLogoToTitleBar()
         locationManagerChecker()
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
     func showNoPermissionsAlert() {
-        let alertController = UIAlertController(title: "No permission", message: "In order to work, app needs your location", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "No permission", message: "Need Permission to retrieve your Location", preferredStyle: .Alert)
         let openSettings = UIAlertAction(title: "Open settings", style: .Default, handler: {
             (action) -> Void in
             let URL = NSURL(string: UIApplicationOpenSettingsURLString)
@@ -70,8 +72,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     func locationManagerChecker() {
-        session = Session.sharedSession()
-        
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
@@ -109,57 +109,40 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         var button = sender as? UIButton
         var parameters = [Parameter.openNow: "1"]
         
-        if button?.tag == 0 {
+        if button?.tag == 0 || button?.tag == 1 {
             parameters += [Parameter.query:pickerData[0][myPicker.selectedRowInComponent(0)]]
             parameters += [Parameter.near:locationText.text]
             parameters += [Parameter.venuePhotos:"1"]
             parameters += [Parameter.price: String(priceControl.selectedSegmentIndex + 1)]
-        } else if button?.tag == 2 {
+            
+            var isSearching: Bool
+            if button?.tag == 0 {
+                isSearching = true
+            } else{
+                isSearching = false
+            }
+            
+            sharedFoursquareProcesses.callingViewController = self
+            sharedFoursquareProcesses.indexedPath = nil
+            sharedFoursquareProcesses.currentValue = 0
+            sharedFoursquareProcesses.getData(parameters, isSearching: isSearching)
+        }
+        
+        if button?.tag == 2 {
             
         } else if button?.tag == 3 {
             
         }
         
         locationManager.stopUpdatingLocation()
-        currentTask?.cancel()
         
-        currentTask = session.venues.explore(parameters) {
-            (result) -> Void in
-            if result.response != nil {
-                if let groups = result.response!["groups"] as? [[String: AnyObject]]  {
-                    var venues = [[String: AnyObject]]()
-                    for group in groups {
-                        if let items = group["items"] as? [[String: AnyObject]] {
-                            venues += items
-                        }
-                    }
-                    
-                    self.venues = venues
-                    if button?.tag == 1 {
-                        self.performSegueWithIdentifier("VyseSegue", sender: self)
-                    } else {
-                        self.performSegueWithIdentifier("SearchSegue", sender: self)
-                    }
-                }
-            }
-        }
-        currentTask?.start()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "LoginSegue" {
-            session.authorizeWithViewController(self, delegate: self) {
+            sharedFoursquareProcesses.session.authorizeWithViewController(self, delegate: self) {
                 (authorized, error) -> Void in
-                
             }
-        }
-        
-        if segue.identifier == "SearchSegue" {
-            var segued = segue.destinationViewController as! ListViewController
-            segued.session = self.session
-            segued.venues = venues
-        } else if segue.identifier == "VyseSegue" {
-            var segued = segue.destinationViewController as! VyseViewController
         }
     }
 }
