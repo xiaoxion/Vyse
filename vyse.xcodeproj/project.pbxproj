@@ -72,7 +72,6 @@
 		0FF9411A1B220A500049EBCE /* FoursquareProcesses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF941191B220A500049EBCE /* FoursquareProcesses.swift */; };
 		0FFB0E591B15055400DAC93A /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFB0E581B15055400DAC93A /* ListViewController.swift */; };
 		B90E3FE8551F2C7A051FDA13 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BCD830929336B43F8AF6B6E /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		E697B77C01F0D40BBF310F0C /* Pods_vyse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3F706E89380CA8307856310 /* Pods_vyse.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,7 +166,6 @@
 			files = (
 				0FD7F8061B1E5F0900808B05 /* MapKit.framework in Frameworks */,
 				0FD7F8041B1E5D0100808B05 /* CoreLocation.framework in Frameworks */,
-				E697B77C01F0D40BBF310F0C /* Pods_vyse.framework in Frameworks */,
 				B90E3FE8551F2C7A051FDA13 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

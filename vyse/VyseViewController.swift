@@ -112,7 +112,7 @@ class VyseViewController:UIViewController {
         
         // Get Image
         if let venuePhoto = objectVenue?["featuredPhotos"]["items"][0].dictionary {
-            var imageString = venuePhoto["prefix"]!.string! + "100x100" + venuePhoto["suffix"]!.string!
+            var imageString = venuePhoto["prefix"]!.string! + "300x300" + venuePhoto["suffix"]!.string!
             let url = NSURL(string: imageString)
             
             getDataFromUrl(url!) { data in
