@@ -8,8 +8,9 @@
 
 import UIKit
 import SwiftyJSON
+import JLToast
 
-class VyseViewController:UIViewController {
+class VyseViewController:UIViewController, UITextViewDelegate {
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var subView: UIView!
     @IBOutlet weak var mainTopContraint: NSLayoutConstraint!
@@ -32,16 +33,23 @@ class VyseViewController:UIViewController {
     @IBOutlet weak var submitButton: UIButton!
     
     var venueID: String!
+    var number: String!
     
     override func viewDidLoad() {
         if sharedFoursquareProcesses.indexedPath != nil {
             sharedFoursquareProcesses.currentValue = sharedFoursquareProcesses.indexedPath
         }
         
+        reviewTextView.delegate = self
+        
         addLogoToTitleBar()
         addGestureRecognizers()
         fillData()
         reenableHiddenContent()
+    }
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        reviewTextView.text = ""
     }
     
     func addGestureRecognizers() {
@@ -60,7 +68,7 @@ class VyseViewController:UIViewController {
     
     func swipeHandler(sender: UISwipeGestureRecognizer) {
         if sender.direction == .Right {
-            if sharedFoursquareProcesses.currentValue < sharedFoursquareProcesses.venues.count {
+            if sharedFoursquareProcesses.currentValue < (sharedFoursquareProcesses.venues.count - 1) {
                 sharedFoursquareProcesses.currentValue = sharedFoursquareProcesses.currentValue + 1
                 
                 UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {
@@ -80,7 +88,7 @@ class VyseViewController:UIViewController {
                             }, completion: nil)
                 })
             } else {
-                
+                JLToast.makeText("No More Results").show()
             }
         } else if sender.direction == .Up {
             UIView.animateWithDuration(0.75, delay: 0.0, options: .CurveEaseOut, animations: {
@@ -112,7 +120,7 @@ class VyseViewController:UIViewController {
         
         // Get Image
         if let venuePhoto = objectVenue?["featuredPhotos"]["items"][0].dictionary {
-            var imageString = venuePhoto["prefix"]!.string! + "300x300" + venuePhoto["suffix"]!.string!
+            var imageString = venuePhoto["prefix"]!.string! + "300x198" + venuePhoto["suffix"]!.string!
             let url = NSURL(string: imageString)
             
             getDataFromUrl(url!) { data in
@@ -130,7 +138,7 @@ class VyseViewController:UIViewController {
         // Restaurant Number if Any
         if let phone = objectVenue?["contact"]["formattedPhone"].string {
             phoneNumber.setTitle(phone, forState: UIControlState.Normal)
-            phoneNumber.setTitle(objectVenue?["contact"]["phone"].string , forState: UIControlState.Selected)
+            number = objectVenue?["contact"]["phone"].string
         } else {
             phoneNumber.setTitle("None", forState: UIControlState.Normal)
             phoneNumber.userInteractionEnabled = false
@@ -147,9 +155,14 @@ class VyseViewController:UIViewController {
         // Input Location Data
         var locationStringAddress = ""
         var locationStringCityStateZip = ""
-        if let addressLocation = objectVenue?["location"].dictionary {
-            locationStringAddress = addressLocation["address"]!.string!
-            locationStringCityStateZip = addressLocation["city"]!.string! + ", " + addressLocation["state"]!.string! + " " + addressLocation["postalCode"]!.string!
+        if let addressLocation = objectVenue?["location"]["formattedAddress"].arrayValue {
+            locationStringAddress = addressLocation[0].string!
+            
+            if addressLocation.count > 1 {
+                locationStringCityStateZip = addressLocation[1].string!
+            } else {
+                locationStringCityStateZip = ""
+            }
         } else {
             locationStringAddress = "Address"
             locationStringCityStateZip = "Unknown"
@@ -215,22 +228,36 @@ class VyseViewController:UIViewController {
     @IBAction func buttonPressed(sender: AnyObject) {
         var button = sender as? UIButton
         
+        // Button Logic
+        if button!.tag == 2 {
+            UIApplication.sharedApplication().openURL(NSURL(string: "tel://" + number)!)
+        }
+        
+        sharedFoursquareProcesses.callingViewController = self
         if button!.tag == 0 {
-            
+            sharedFoursquareProcesses.addToFavorites()
         } else if button!.tag == 1 {
-            
-        } else if button!.tag == 2 {
-            UIApplication.sharedApplication().openURL(NSURL(string: "tel://" + "8134849139")!)
-        } else if button!.tag == 3 {
-            UIApplication.sharedApplication().openURL(NSURL(string: (button?.titleLabel?.text)!)!)
-        } else if button!.tag == 4 {
-            sharedFoursquareProcesses.session.venues.like(venueID, like: true, completionHandler: nil)
-        } else if button!.tag == 5 {
-            sharedFoursquareProcesses.session.tips.add(venueID, text: reviewTextView.text, parameters: nil, completionHandler: nil)
+            sharedFoursquareProcesses.addToSaved()
         } else if button!.tag == 6 {
-            
+            sharedFoursquareProcesses.retrieveFromFavorites()
         } else if button!.tag == 7 {
-            
+            sharedFoursquareProcesses.retrieveFromSaved()
+        }
+        
+        if sharedFoursquareProcesses.checkReachibility() {
+            if button!.tag == 3 {
+                UIApplication.sharedApplication().openURL(NSURL(string: (button?.titleLabel?.text)!)!)
+            } else if button!.tag == 4 {
+                sharedFoursquareProcesses.likeVenueWith(venueID);
+                likeFoursquare.imageView?.image = UIImage(named: "thumb_up_filled-50.png")
+                JLToast.makeText("Liked!").show()
+            } else if button!.tag == 5 {
+                    sharedFoursquareProcesses.tipVenueWith(venueID, tipText: reviewTextView.text)
+                    reviewTextView.text = ""
+                    JLToast.makeText("Tip left!").show()
+            }
+        } else {
+            JLToast.makeText("Error, check internet connection!").show()
         }
     }
 }

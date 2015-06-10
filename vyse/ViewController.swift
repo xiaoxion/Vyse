@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreLocation
 import MapKit
+import JLToast
 
 class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, CLLocationManagerDelegate, SessionAuthorizationDelegate, UITextFieldDelegate {
     @IBOutlet weak var myPicker: UIPickerView!
@@ -25,9 +26,14 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         locationText.delegate = self
-        
+        locationText.attributedPlaceholder = NSAttributedString(string: "i.e New York, NY", attributes: [NSForegroundColorAttributeName:UIColor(red: CGFloat(232/255.0), green: CGFloat(225/255.0), blue: CGFloat(196/255.0), alpha: CGFloat(1.0))])
+
         addLogoToTitleBar()
         locationManagerChecker()
+    }
+
+    func textFieldDidBeginEditing(textField: UITextField) {
+        locationText.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSForegroundColorAttributeName:UIColor(red: CGFloat(232/255.0), green: CGFloat(225/255.0), blue: CGFloat(196/255.0), alpha: CGFloat(1.0))])
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -101,7 +107,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 self.locationManager.stopUpdatingLocation()
             })
         } else {
-            self.locationText.attributedPlaceholder = NSAttributedString(string: "Error Getting Location", attributes: [NSForegroundColorAttributeName:UIColor(red: CGFloat(249/255.0), green: CGFloat(150/255.0), blue: CGFloat(108/255.0), alpha: CGFloat(1.0))])
+            self.locationText.text = ""
+            JLToast.makeText("Error getting Location").show()
         }
     }
     
@@ -110,6 +117,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         var parameters = [Parameter.openNow: "1"]
         
         if button?.tag == 0 || button?.tag == 1 {
+            if locationText.text == "" {
+                JLToast.makeText("Need a Location").show()
+                return
+            }
+            
             parameters += [Parameter.query:pickerData[0][myPicker.selectedRowInComponent(0)]]
             parameters += [Parameter.near:locationText.text]
             parameters += [Parameter.venuePhotos:"1"]
@@ -128,21 +140,21 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             sharedFoursquareProcesses.getData(parameters, isSearching: isSearching)
         }
         
-        if button?.tag == 2 {
-            
-        } else if button?.tag == 3 {
-            
+        if button?.tag == 2 || button?.tag == 3 {
+            var file = "saved.json"
+            if button?.tag == 2 {
+                file = "favorites.json"
+            }
+            sharedFoursquareProcesses.read(file)
         }
         
         locationManager.stopUpdatingLocation()
         
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "LoginSegue" {
-            sharedFoursquareProcesses.session.authorizeWithViewController(self, delegate: self) {
-                (authorized, error) -> Void in
-            }
+    @IBAction func barItemPressed() {
+        sharedFoursquareProcesses.session.authorizeWithViewController(self, delegate: self) {
+            (authorized, error) -> Void in
         }
     }
 }

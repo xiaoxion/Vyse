@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Pods-JLToast.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -17,12 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>16E01EBE7925998F08E3498C</key>
+		<key>50457D00C2ABF7692FA37DDD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1BD48F1E935701D7F6509363</key>
+		<key>876FB1E5A213FFA44FB9930A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A18FAF070D9B7718C6AD7D72</key>
 		<dict>
 			<key>primary</key>
 			<true/>
