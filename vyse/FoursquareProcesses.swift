@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SwiftyJSON
+import JLToast
 
 class FoursquareProccesses {
     var callingViewController: UIViewController!
@@ -17,10 +18,9 @@ class FoursquareProccesses {
     var currentTask: Task?
     var indexedPath: Int?
     var currentValue: Int!
-    
-    let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
-    let saveFile = "saved.json"
-    let favoriteFile = "favorites.json"
+    var savedID: String!
+    var favoriteID: String!
+    var retrieveFromList = false
 
     func getData(parameters: Parameters, isSearching: Bool) {
         currentTask?.cancel()
@@ -34,6 +34,7 @@ class FoursquareProccesses {
                     if let items = result.response?["groups"][0]["items"] {
                         
                         self.venues = items
+                        self.retrieveFromList = false
                         
                         if isSearching {
                             self.callingViewController!.performSegueWithIdentifier("SearchSegue", sender: self.callingViewController!)
@@ -57,9 +58,15 @@ class FoursquareProccesses {
     }
     
     func checkReachibility() -> Bool {
-        let reachability = Reachability.reachabilityForInternetConnection()
+        if !Reachability.reachabilityForInternetConnection().isReachable() {
+            JLToast.makeText("Need Internet Connection").show()
+        }
         
-        return reachability.isReachable()
+        return Reachability.reachabilityForInternetConnection().isReachable()
+    }
+    
+    func checkAuthorized() -> Bool {
+        return session.isAuthorized()
     }
     
     func likeVenueWith(id: String) {
@@ -74,71 +81,130 @@ class FoursquareProccesses {
         currentTask?.start()
     }
     
-    func addToSaved() {
-        if session.isAuthorized() {
+    func checkLists() {
+        if checkAuthorized() {
+            if savedID != nil && favoriteID != nil {
+                return
+            }
+            
+            currentTask?.cancel()
+            currentTask =  session.users.lists(userId: "self", parameters: [Parameter.group: "created"]) {
+                (result) -> Void in
+                    if result.response != nil {
+                        if let items = result.response?["lists"]["items"].array {
+                            var isSaved = false;
+                            var isFavorite = false;
+                            
+                            // Check for listed items
+                            for item in items {
+                                if item["name"] == "VyséSaved" {
+                                    isSaved = true
+                                    self.savedID = item["id"].string
+                                }
+                                
+                                if item["name"] == "VyséFavorites" {
+                                    isFavorite = true
+                                    self.favoriteID = item["id"].string
+                                }
+                                
+                                if isSaved && isFavorite {
+                                    return
+                                }
+                            }
+                            
+                            // if lists don't exists, make them
+                            if !isSaved {
+                                let task = self.session.lists.add("VyséSaved", text: "Vysé saved for later", parameters: nil) {
+                                    (result) -> Void in
+                                    if result.response != nil {
+                                        self.savedID = result.response?["id"].string
+                                    }
+                                }
+                                task.start()
+                            }
+                            
+                            if !isFavorite {
+                                let task = self.session.lists.add("VyséFavorites", text: "Vysé favorited", parameters: nil) {
+                                    (result) -> Void in
+                                    if result.response != nil {
+                                        self.favoriteID = result.response?["id"].string
+                                    }
+                                }
+                                task.start()
+                            }
+                        }
+                    }
+            }
+            currentTask?.start()
+        }
+    }
+    
+    func addRemoveGet(getting: Bool, adding: Bool?, saving: Bool, venueID: String?) {
+        //Getting Data Foursquare
+        if checkAuthorized() {
             if checkReachibility() {
-                session.venues
+                var daListID: String!
+                if saving {
+                    daListID = savedID
+                } else {
+                    daListID = favoriteID
+                }
+                
+                currentTask?.cancel()
+                if !getting {
+                    currentTask = session.lists.additem(daListID, parameters: [Parameter.venueId: venueID!], completionHandler: nil)
+                } else {
+                    currentTask = session.lists.get(daListID, parameters: nil) {
+                        (result) -> Void in
+                        if result.response != nil {
+                            if let item = result.response?["list"]["listItems"]["items"] {
+                                self.venues = item
+                                self.retrieveFromList = true
+                                self.callingViewController!.performSegueWithIdentifier("SearchSegue", sender: self.callingViewController!)
+                                
+                            }
+                        }
+                    }
+                }
+                currentTask?.start()
             } else {
-                
+                JLToast.makeText("Check Internet Connection!").show()
             }
-        } else {
-            
         }
-    }
-    
-    func retrieveFromSaved() {
-        if session.isAuthorized() {
-            if checkReachibility() {
-                
+        
+        // Getting the Data Locally
+        else {
+            if getting {
+                if sharedFileProcesses.exists(saving) {
+                    sharedFileProcesses.readCreate(saving)
+                } else {
+                    JLToast.makeText("Nothing to Show").show()
+                }
             } else {
+                var daID: JSON  = ["id": venueID!]
                 
-            }
-        } else {
-            
-        }
-    }
-    
-    func addToFavorites() {
-        if session.isAuthorized() {
-            if checkReachibility() {
-                
-            } else {
-                
-            }
-        } else {
-            
-        }
-    }
-    
-    func retrieveFromFavorites() {
-        if session.isAuthorized() {
-            if checkReachibility() {
-                
-            } else {
-                
-            }
-        } else {
-            
-        }
-    }
-    
-    func exists (file: String) -> Bool {
-        return NSFileManager().fileExistsAtPath(documentsPath + file)
-    }
-    
-    func read (file: String) {
-        var venueArray: JSON
-        if self.exists(file) {
-            venueArray = JSON(data: NSData(contentsOfFile: documentsPath + file)!, options: NSJSONReadingOptions.AllowFragments, error: nil)
-            
-            for venueArrays in venueArray {
-                //ve
+                if sharedFileProcesses.exists(saving) {
+                    if let JSONObject = sharedFileProcesses.read(saving) {
+                        var mutableJSON = JSONObject.arrayValue
+                        mutableJSON.append(daID)
+                        var daData = mutableJSON.description
+                        
+                        if sharedFileProcesses.write(saving, content: mutableJSON.description, encoding: NSUTF8StringEncoding) {
+                            JLToast.makeText("Saved!").show()
+                        } else {
+                            JLToast.makeText("Error Saving").show()
+                        }
+                    }
+                } else {
+                    var daJSON = [daID]
+                    if sharedFileProcesses.write(saving, content: daJSON.description, encoding: NSUTF8StringEncoding) {
+                        JLToast.makeText("Saved!").show()
+                    } else {
+                        JLToast.makeText("Error Saving").show()
+                    }
+                }
             }
         }
-    }
-    
-    func write (file: String, content: String, encoding: NSStringEncoding = NSUTF8StringEncoding) -> Bool {
-        return content.writeToFile(file, atomically: true, encoding: encoding, error: nil)
     }
 }
 

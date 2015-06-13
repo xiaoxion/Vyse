@@ -56,8 +56,9 @@
 		0FD7F8021B1E5ADD00808B05 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD7F7E21B1E5ADD00808B05 /* Task.swift */; };
 		0FD7F8041B1E5D0100808B05 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD7F8031B1E5D0100808B05 /* CoreLocation.framework */; };
 		0FD7F8061B1E5F0900808B05 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD7F8051B1E5F0900808B05 /* MapKit.framework */; };
+		0FF3C3661B2A126F0030F226 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF3C3651B2A126F0030F226 /* SystemConfiguration.framework */; };
+		0FF4A0101B2C8A17004C674B /* FileProcesses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF4A00F1B2C8A17004C674B /* FileProcesses.swift */; };
 		0FF6D6501B16207C0096E0B2 /* VyseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF6D64F1B16207C0096E0B2 /* VyseViewController.swift */; };
-		0FF6D6521B16215C0096E0B2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF6D6511B16215C0096E0B2 /* LoginViewController.swift */; };
 		0FF6D6541B1662760096E0B2 /* MainBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF6D6531B1662760096E0B2 /* MainBackground.png */; };
 		0FF6D6561B1663B80096E0B2 /* location_filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF6D6551B1663B80096E0B2 /* location_filled-100.png */; };
 		0FF6D6581B166A580096E0B2 /* VyseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF6D6571B166A580096E0B2 /* VyseButton.png */; };
@@ -139,8 +140,9 @@
 		0FD7F7E21B1E5ADD00808B05 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		0FD7F8031B1E5D0100808B05 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0FD7F8051B1E5F0900808B05 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		0FF3C3651B2A126F0030F226 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		0FF4A00F1B2C8A17004C674B /* FileProcesses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileProcesses.swift; sourceTree = "<group>"; };
 		0FF6D64F1B16207C0096E0B2 /* VyseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VyseViewController.swift; sourceTree = "<group>"; };
-		0FF6D6511B16215C0096E0B2 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0FF6D6531B1662760096E0B2 /* MainBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MainBackground.png; sourceTree = "<group>"; };
 		0FF6D6551B1663B80096E0B2 /* location_filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location_filled-100.png"; sourceTree = "<group>"; };
 		0FF6D6571B166A580096E0B2 /* VyseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VyseButton.png; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FF3C3661B2A126F0030F226 /* SystemConfiguration.framework in Frameworks */,
 				0FD7F8061B1E5F0900808B05 /* MapKit.framework in Frameworks */,
 				0FD7F8041B1E5D0100808B05 /* CoreLocation.framework in Frameworks */,
 				B90E3FE8551F2C7A051FDA13 /* Pods.framework in Frameworks */,
@@ -333,7 +336,6 @@
 			children = (
 				0F04A3D91B0D07BF00FDD33F /* NavigationController.swift */,
 				0F04A3B91B0D05FA00FDD33F /* ViewController.swift */,
-				0FF6D6511B16215C0096E0B2 /* LoginViewController.swift */,
 				0FF6D64F1B16207C0096E0B2 /* VyseViewController.swift */,
 				0FFB0E581B15055400DAC93A /* ListViewController.swift */,
 			);
@@ -346,6 +348,7 @@
 				0FF941191B220A500049EBCE /* FoursquareProcesses.swift */,
 				0FF6D9901B1802CD00080C4D /* FoodCell.swift */,
 				0FBECD091B28E636002FCE6E /* Reachability.swift */,
+				0FF4A00F1B2C8A17004C674B /* FileProcesses.swift */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 		A1F2461F17F993EA60084819 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0FF3C3651B2A126F0030F226 /* SystemConfiguration.framework */,
 				0FD7F8051B1E5F0900808B05 /* MapKit.framework */,
 				0FD7F8031B1E5D0100808B05 /* CoreLocation.framework */,
 				E3F706E89380CA8307856310 /* Pods_vyse.framework */,
@@ -549,7 +553,6 @@
 				0FD7F7E41B1E5ADD00808B05 /* AuthorizationViewController.swift in Sources */,
 				0FD7F7E61B1E5ADD00808B05 /* NativeTouchAuthorizer.swift in Sources */,
 				0FD7F7FD1B1E5ADD00808B05 /* OauthErrors.swift in Sources */,
-				0FF6D6521B16215C0096E0B2 /* LoginViewController.swift in Sources */,
 				0FF9411A1B220A500049EBCE /* FoursquareProcesses.swift in Sources */,
 				0FD7F7E81B1E5ADD00808B05 /* Authorizer.swift in Sources */,
 				0FD7F7F31B1E5ADD00808B05 /* Settings.swift in Sources */,
@@ -570,6 +573,7 @@
 				0FD7F8021B1E5ADD00808B05 /* Task.swift in Sources */,
 				0FD7F7FE1B1E5ADD00808B05 /* Parameters.swift in Sources */,
 				0FD7F7ED1B1E5ADD00808B05 /* Events.swift in Sources */,
+				0FF4A0101B2C8A17004C674B /* FileProcesses.swift in Sources */,
 				0FD7F8011B1E5ADD00808B05 /* Session.swift in Sources */,
 				0FD7F7E31B1E5ADD00808B05 /* Authorization.swift in Sources */,
 				0FD7F7F41B1E5ADD00808B05 /* Specials.swift in Sources */,
@@ -704,7 +708,7 @@
 		};
 		0F04A3D21B0D05FA00FDD33F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A3FD3949FD18AAA02A945422 /* Pods.release.xcconfig */;
+			baseConfigurationReference = AB246143725B86B3EE76A431 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -730,6 +734,7 @@
 		};
 		0F04A3D51B0D05FA00FDD33F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AB246143725B86B3EE76A431 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -749,6 +754,7 @@
 		};
 		0F04A3D61B0D05FA00FDD33F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A3FD3949FD18AAA02A945422 /* Pods.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (

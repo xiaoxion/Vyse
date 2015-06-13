@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      redirectURL:     "vyse://foursquare")
         var configuration = Configuration(client:client)
         configuration.shouldControllNetworkActivityIndicator = true
+        configuration.version = "20150612"
+        //configuration.mode = "foursquare"
         Session.setupSharedSessionWithConfiguration(configuration)
         
         return true

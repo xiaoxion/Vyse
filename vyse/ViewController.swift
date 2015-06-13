@@ -16,6 +16,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var myPicker: UIPickerView!
     @IBOutlet weak var locationText: UITextField!
     @IBOutlet weak var priceControl: UISegmentedControl!
+    @IBOutlet weak var loggingButton: UIBarButtonItem!
     
     var locationManager: CLLocationManager!
     
@@ -25,22 +26,18 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        locationText.delegate = self
         locationText.attributedPlaceholder = NSAttributedString(string: "i.e New York, NY", attributes: [NSForegroundColorAttributeName:UIColor(red: CGFloat(232/255.0), green: CGFloat(225/255.0), blue: CGFloat(196/255.0), alpha: CGFloat(1.0))])
-
         addLogoToTitleBar()
         locationManagerChecker()
-    }
-
-    func textFieldDidBeginEditing(textField: UITextField) {
-        locationText.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSForegroundColorAttributeName:UIColor(red: CGFloat(232/255.0), green: CGFloat(225/255.0), blue: CGFloat(196/255.0), alpha: CGFloat(1.0))])
-    }
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
+        
+        if sharedFoursquareProcesses.checkAuthorized() && sharedFoursquareProcesses.checkReachibility() {
+            sharedFoursquareProcesses.checkLists()
+            loggingButton.image = nil
+            loggingButton.title = "Log Out"
+        }
     }
     
+    // Location Alert If Permissions is Denied
     func showNoPermissionsAlert() {
         let alertController = UIAlertController(title: "No permission", message: "Need Permission to retrieve your Location", preferredStyle: .Alert)
         let openSettings = UIAlertAction(title: "Open settings", style: .Default, handler: {
@@ -53,6 +50,17 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         presentViewController(alertController, animated: true, completion: nil)
     }
     
+    // Text Field Logic
+    func textFieldDidBeginEditing(textField: UITextField) {
+        locationText.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSForegroundColorAttributeName:UIColor(red: CGFloat(232/255.0), green: CGFloat(225/255.0), blue: CGFloat(196/255.0), alpha: CGFloat(1.0))])
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
+    // Picker Data and Logic
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return pickerData.count;
     }
@@ -69,6 +77,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         return NSAttributedString(string: pickerData[component][row], attributes: [NSForegroundColorAttributeName:UIColor(red: CGFloat(49/255.0), green: CGFloat(120/255.0), blue: CGFloat(178/255.0), alpha: CGFloat(1.0))])
     }
     
+    // Add Logo to Title Bar
     func addLogoToTitleBar() {
         let logoImage = UIImage(named: "Vyse.png")
         let logoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 0, height: 36))
@@ -77,6 +86,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         self.navigationItem.titleView = logoView
     }
     
+    // Check for Location Access
     func locationManagerChecker() {
         locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -94,10 +104,14 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
     }
     
+    
+    // MARK: Actionable Data
+    
+    // Add Location Button Logic
     @IBAction func addLocationButton() {
         locationManager.startUpdatingLocation()
         
-        if locationManager.location != nil {
+        if locationManager.location != nil && sharedFoursquareProcesses.checkReachibility() {
             CLGeocoder().reverseGeocodeLocation(locationManager.location, completionHandler: {(placemarks, error) -> Void in
                 let placemark = placemarks[0] as! CLPlacemark
                 var city = placemark.locality
@@ -106,15 +120,22 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 self.locationText.text = NSString(format:"%@, %@", city, state) as String
                 self.locationManager.stopUpdatingLocation()
             })
-        } else {
+        } else if locationManager.location == nil {
             self.locationText.text = ""
             JLToast.makeText("Error getting Location").show()
         }
     }
     
+    // Start Segues
     @IBAction func segueButton(sender: AnyObject) {
+        if !sharedFoursquareProcesses.checkReachibility() {
+            return
+        }
+        
         var button = sender as? UIButton
         var parameters = [Parameter.openNow: "1"]
+        sharedFoursquareProcesses.callingViewController = self
+
         
         if button?.tag == 0 || button?.tag == 1 {
             if locationText.text == "" {
@@ -122,6 +143,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 return
             }
             
+            parameters += [Parameter.m: "swarm"]
             parameters += [Parameter.query:pickerData[0][myPicker.selectedRowInComponent(0)]]
             parameters += [Parameter.near:locationText.text]
             parameters += [Parameter.venuePhotos:"1"]
@@ -134,27 +156,53 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 isSearching = false
             }
             
-            sharedFoursquareProcesses.callingViewController = self
             sharedFoursquareProcesses.indexedPath = nil
             sharedFoursquareProcesses.currentValue = 0
             sharedFoursquareProcesses.getData(parameters, isSearching: isSearching)
         }
         
         if button?.tag == 2 || button?.tag == 3 {
-            var file = "saved.json"
-            if button?.tag == 2 {
-                file = "favorites.json"
+            var saved = false
+            if button?.tag == 3 {
+                saved = true
             }
-            sharedFoursquareProcesses.read(file)
+            sharedFoursquareProcesses.addRemoveGet(true, adding:nil, saving: saved, venueID: nil)
         }
         
         locationManager.stopUpdatingLocation()
         
     }
     
+    // Login Button Logic
     @IBAction func barItemPressed() {
-        sharedFoursquareProcesses.session.authorizeWithViewController(self, delegate: self) {
+        if !sharedFoursquareProcesses.checkAuthorized() {
+            sharedFoursquareProcesses.session.authorizeWithViewController(self, delegate: self) {
             (authorized, error) -> Void in
+                sharedFoursquareProcesses.checkLists()
+                self.loggingButton.image = nil
+                self.loggingButton.title = "Log Out"
+            }
+        } else {
+            logOutAlert()
         }
+    }
+    
+    func logOutAlert() {
+        let alertController = UIAlertController(title: "Are you Sure?", message: nil, preferredStyle: .Alert)
+        let confrim = UIAlertAction(title: "Confirm", style: .Destructive, handler: {
+            (action) -> Void in
+            sharedFoursquareProcesses.session.deauthorize()
+            self.loggingButton.title = ""
+            self.loggingButton.image = UIImage(named: "Male50.png")
+            self.dismissViewControllerAnimated(true, completion: nil)
+        })
+        let cancel = UIAlertAction(title: "Cancel", style: .Default, handler: {
+            (action) -> Void in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        })
+        
+        alertController.addAction(cancel)
+        alertController.addAction(confrim)
+        presentViewController(alertController, animated: true, completion: nil)
     }
 }

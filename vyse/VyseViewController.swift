@@ -46,12 +46,18 @@ class VyseViewController:UIViewController, UITextViewDelegate {
         addGestureRecognizers()
         fillData()
         reenableHiddenContent()
+        
+        if sharedFoursquareProcesses.checkAuthorized() && sharedFoursquareProcesses.checkReachibility() {
+            sharedFoursquareProcesses.checkLists()
+        }
     }
     
+    // TextView
     func textViewDidBeginEditing(textView: UITextView) {
         reviewTextView.text = ""
     }
     
+    // Gesture Logic
     func addGestureRecognizers() {
         var upSwipe = UISwipeGestureRecognizer(target: self, action: Selector("swipeHandler:"))
         var downSwipe = UISwipeGestureRecognizer(target: self, action: Selector("swipeHandler:"))
@@ -91,14 +97,14 @@ class VyseViewController:UIViewController, UITextViewDelegate {
                 JLToast.makeText("No More Results").show()
             }
         } else if sender.direction == .Up {
-            UIView.animateWithDuration(0.75, delay: 0.0, options: .CurveEaseOut, animations: {
+            UIView.animateWithDuration(0.45, delay: 0.0, options: .CurveEaseOut, animations: {
                 self.mainTopContraint.constant = -80
                 self.subTopConstraint.constant = -34
                 self.mainView.layoutIfNeeded()
                 self.subView.layoutIfNeeded()
             }, completion: nil)
         } else if sender.direction == .Down {
-            UIView.animateWithDuration(0.75, delay: 0.0, options: .CurveEaseOut, animations: {
+            UIView.animateWithDuration(0.45, delay: 0.0, options: .CurveEaseOut, animations: {
                 self.mainTopContraint.constant = 8
                 self.subTopConstraint.constant = 300
                 self.mainView.layoutIfNeeded()
@@ -107,6 +113,7 @@ class VyseViewController:UIViewController, UITextViewDelegate {
         }
     }
     
+    // Add Logo
     func addLogoToTitleBar() {
         let logoImage = UIImage(named: "Vyse.png")
         let logoView = UIImageView(frame: CGRect(x: 0, y: 0, width: 0, height: 36))
@@ -115,21 +122,38 @@ class VyseViewController:UIViewController, UITextViewDelegate {
         self.navigationItem.titleView = logoView
     }
     
+    // Add Data to Views
     func fillData() {
         let objectVenue: JSON? = sharedFoursquareProcesses.venues[sharedFoursquareProcesses.currentValue]["venue"]
         
         // Get Image
-        if let venuePhoto = objectVenue?["featuredPhotos"]["items"][0].dictionary {
-            var imageString = venuePhoto["prefix"]!.string! + "300x198" + venuePhoto["suffix"]!.string!
-            let url = NSURL(string: imageString)
-            
-            getDataFromUrl(url!) { data in
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.foodImage.image = UIImage(data: data!)
+        if sharedFoursquareProcesses.retrieveFromList {
+            if let venuePhoto = sharedFoursquareProcesses.venues[sharedFoursquareProcesses.currentValue]["photo"].dictionary {
+                var imageString = venuePhoto["prefix"]!.string! + "300x198" + venuePhoto["suffix"]!.string!
+                let url = NSURL(string: imageString)
+                
+                getDataFromUrl(url!) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.foodImage.image = UIImage(data: data!)
+                    }
                 }
+            } else {
+                foodImage.image = UIImage(named: "MainBackground.png")
             }
+            
         } else {
-            foodImage.image = UIImage(named: "MainBackground.png")
+            if let venuePhoto = objectVenue?["featuredPhotos"]["items"][0].dictionary {
+                var imageString = venuePhoto["prefix"]!.string! + "300x198" + venuePhoto["suffix"]!.string!
+                let url = NSURL(string: imageString)
+                
+                getDataFromUrl(url!) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.foodImage.image = UIImage(data: data!)
+                    }
+                }
+            } else {
+                foodImage.image = UIImage(named: "MainBackground.png")
+            }
         }
         
         // Restaurant Name
@@ -211,12 +235,14 @@ class VyseViewController:UIViewController, UITextViewDelegate {
         venueID = objectVenue?["id"].string
     }
     
+    // Get Image
     func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
         NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
             completion(data: NSData(data: data))
             }.resume()
     }
     
+    // Reenable disabled content if Logged In
     func reenableHiddenContent() {
         if sharedFoursquareProcesses.session.isAuthorized() {
             reviewTextView.hidden = false
@@ -225,6 +251,7 @@ class VyseViewController:UIViewController, UITextViewDelegate {
         }
     }
     
+    // MARK: Actionable Logic
     @IBAction func buttonPressed(sender: AnyObject) {
         var button = sender as? UIButton
         
@@ -233,17 +260,7 @@ class VyseViewController:UIViewController, UITextViewDelegate {
             UIApplication.sharedApplication().openURL(NSURL(string: "tel://" + number)!)
         }
         
-        sharedFoursquareProcesses.callingViewController = self
-        if button!.tag == 0 {
-            sharedFoursquareProcesses.addToFavorites()
-        } else if button!.tag == 1 {
-            sharedFoursquareProcesses.addToSaved()
-        } else if button!.tag == 6 {
-            sharedFoursquareProcesses.retrieveFromFavorites()
-        } else if button!.tag == 7 {
-            sharedFoursquareProcesses.retrieveFromSaved()
-        }
-        
+        // Like Content
         if sharedFoursquareProcesses.checkReachibility() {
             if button!.tag == 3 {
                 UIApplication.sharedApplication().openURL(NSURL(string: (button?.titleLabel?.text)!)!)
@@ -252,12 +269,24 @@ class VyseViewController:UIViewController, UITextViewDelegate {
                 likeFoursquare.imageView?.image = UIImage(named: "thumb_up_filled-50.png")
                 JLToast.makeText("Liked!").show()
             } else if button!.tag == 5 {
-                    sharedFoursquareProcesses.tipVenueWith(venueID, tipText: reviewTextView.text)
-                    reviewTextView.text = ""
-                    JLToast.makeText("Tip left!").show()
+                sharedFoursquareProcesses.tipVenueWith(venueID, tipText: reviewTextView.text)
+                reviewTextView.text = ""
+                JLToast.makeText("Tip left!").show()
             }
         } else {
             JLToast.makeText("Error, check internet connection!").show()
+        }
+        
+        // Set Controller as Self for segues
+        sharedFoursquareProcesses.callingViewController = self
+        if button!.tag == 0 {
+            sharedFoursquareProcesses.addRemoveGet(false, adding:true, saving: false, venueID: venueID)
+        } else if button!.tag == 1 {
+            sharedFoursquareProcesses.addRemoveGet(false, adding:true, saving: true, venueID: venueID)
+        } else if button!.tag == 6 {
+            sharedFoursquareProcesses.addRemoveGet(true, adding:nil, saving: false, venueID: nil)
+        } else if button!.tag == 7 {
+            sharedFoursquareProcesses.addRemoveGet(true, adding:nil, saving: true, venueID: nil)
         }
     }
 }
