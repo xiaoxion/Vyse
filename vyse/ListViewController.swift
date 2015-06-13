@@ -44,6 +44,19 @@ class ListViewController: UITableViewController {
             // Set Rating and Date to Empty
             cell.ratingLabel.text = ""
             cell.subLabel.text = ""
+        } else if sharedFoursquareProcesses.retrieveFromLocal {
+            if let venuePhoto = sharedFoursquareProcesses.venues[indexPath.row]["venue"]["bestPhoto"].dictionary {
+                var imageString = venuePhoto["prefix"]!.string! + "300x198" + venuePhoto["suffix"]!.string!
+                let url = NSURL(string: imageString)
+                
+                getDataFromUrl(url!) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        cell.mainImage.image = UIImage(data: data!)
+                    }
+                }
+            } else {
+                cell.mainImage.image = UIImage(named: "MainBackground.png")
+            }
         } else {
             // Photo Logic
             if let venuePhoto = objectVenue?["featuredPhotos"]["items"][0].dictionary {

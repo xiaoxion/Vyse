@@ -52,6 +52,8 @@ class FileProcesses {
                     
                     if tempArray.count == venueArray[0].count {
                         sharedFoursquareProcesses.venues = JSON(tempArray)
+                        sharedFoursquareProcesses.retrieveFromList = false
+                        sharedFoursquareProcesses.retrieveFromLocal = true
                         sharedFoursquareProcesses.callingViewController!.performSegueWithIdentifier("SearchSegue", sender: sharedFoursquareProcesses.callingViewController!)
                     }
                 }

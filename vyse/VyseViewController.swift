@@ -141,6 +141,19 @@ class VyseViewController:UIViewController, UITextViewDelegate {
                 foodImage.image = UIImage(named: "MainBackground.png")
             }
             
+        } else if sharedFoursquareProcesses.retrieveFromLocal {
+            if let venuePhoto = sharedFoursquareProcesses.venues[sharedFoursquareProcesses.currentValue]["venue"]["bestPhoto"].dictionary {
+                var imageString = venuePhoto["prefix"]!.string! + "300x198" + venuePhoto["suffix"]!.string!
+                let url = NSURL(string: imageString)
+                
+                getDataFromUrl(url!) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.foodImage.image = UIImage(data: data!)
+                    }
+                }
+            } else {
+                foodImage.image = UIImage(named: "MainBackground.png")
+            }
         } else {
             if let venuePhoto = objectVenue?["featuredPhotos"]["items"][0].dictionary {
                 var imageString = venuePhoto["prefix"]!.string! + "300x198" + venuePhoto["suffix"]!.string!

@@ -21,6 +21,7 @@ class FoursquareProccesses {
     var savedID: String!
     var favoriteID: String!
     var retrieveFromList = false
+    var retrieveFromLocal = false
 
     func getData(parameters: Parameters, isSearching: Bool) {
         currentTask?.cancel()
@@ -36,6 +37,8 @@ class FoursquareProccesses {
                         self.venues = items
                         self.retrieveFromList = false
                         
+                        self.retrieveFromList = false
+                        self.retrieveFromLocal = false
                         if isSearching {
                             self.callingViewController!.performSegueWithIdentifier("SearchSegue", sender: self.callingViewController!)
                         } else {
@@ -160,6 +163,7 @@ class FoursquareProccesses {
                             if let item = result.response?["list"]["listItems"]["items"] {
                                 self.venues = item
                                 self.retrieveFromList = true
+                                self.retrieveFromLocal = false
                                 self.callingViewController!.performSegueWithIdentifier("SearchSegue", sender: self.callingViewController!)
                                 
                             }
