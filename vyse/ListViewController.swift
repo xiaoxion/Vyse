@@ -57,6 +57,9 @@ class ListViewController: UITableViewController {
             } else {
                 cell.mainImage.image = UIImage(named: "MainBackground.png")
             }
+            
+            cell.ratingLabel.text = ""
+            cell.subLabel.text = ""
         } else {
             // Photo Logic
             if let venuePhoto = objectVenue?["featuredPhotos"]["items"][0].dictionary {

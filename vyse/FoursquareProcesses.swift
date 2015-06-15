@@ -161,11 +161,14 @@ class FoursquareProccesses {
                         (result) -> Void in
                         if result.response != nil {
                             if let item = result.response?["list"]["listItems"]["items"] {
-                                self.venues = item
-                                self.retrieveFromList = true
-                                self.retrieveFromLocal = false
-                                self.callingViewController!.performSegueWithIdentifier("SearchSegue", sender: self.callingViewController!)
-                                
+                                if item.count > 0 {
+                                    self.venues = item
+                                    self.retrieveFromList = true
+                                    self.retrieveFromLocal = false
+                                    self.callingViewController!.performSegueWithIdentifier("SearchSegue", sender: self.callingViewController!)
+                                } else {
+                                    JLToast.makeText("Nothing to Show").show()
+                                }
                             }
                         }
                     }

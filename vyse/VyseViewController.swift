@@ -9,6 +9,8 @@
 import UIKit
 import SwiftyJSON
 import JLToast
+import CoreLocation
+import MapKit
 
 class VyseViewController:UIViewController, UITextViewDelegate {
     @IBOutlet weak var mainView: UIView!
@@ -27,6 +29,7 @@ class VyseViewController:UIViewController, UITextViewDelegate {
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var ratingNumber: UILabel!
     @IBOutlet weak var foodType: UILabel!
+    @IBOutlet weak var outlineImage: UIImageView!
     
     @IBOutlet weak var reviewTextView: UITextView!
     @IBOutlet weak var likeFoursquare: UIButton!
@@ -34,10 +37,20 @@ class VyseViewController:UIViewController, UITextViewDelegate {
     
     var venueID: String!
     var number: String!
+    var venueName: String!
+    var tutorialNeeded = false
     
     override func viewDidLoad() {
         if sharedFoursquareProcesses.indexedPath != nil {
             sharedFoursquareProcesses.currentValue = sharedFoursquareProcesses.indexedPath
+        }
+        
+        var data = NSMutableDictionary(contentsOfFile: NSBundle.mainBundle().pathForResource("Data", ofType: "plist")!)
+        if data?.objectForKey("isTutorialNeeded") as! Bool {
+            tutorialNeeded = true
+            outlineImage.image = UIImage(named: "VyseTutorial.png")
+            data?.setObject(false, forKey: "isTutorialNeeded")
+            data?.writeToFile(NSBundle.mainBundle().pathForResource("Data", ofType: "plist")!, atomically: false)
         }
         
         reviewTextView.delegate = self
@@ -77,6 +90,11 @@ class VyseViewController:UIViewController, UITextViewDelegate {
             if sharedFoursquareProcesses.currentValue < (sharedFoursquareProcesses.venues.count - 1) {
                 sharedFoursquareProcesses.currentValue = sharedFoursquareProcesses.currentValue + 1
                 
+                if tutorialNeeded {
+                    tutorialNeeded = false
+                    outlineImage.image = UIImage(named: "VyseOutline.png")
+                }
+                
                 UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {
                     self.mainTopContraint.constant = 8
                     self.subTopConstraint.constant = 300
@@ -97,6 +115,10 @@ class VyseViewController:UIViewController, UITextViewDelegate {
                 JLToast.makeText("No More Results").show()
             }
         } else if sender.direction == .Up {
+            if tutorialNeeded {
+                tutorialNeeded = false
+                outlineImage.image = UIImage(named: "VyseOutline.png")
+            }
             UIView.animateWithDuration(0.45, delay: 0.0, options: .CurveEaseOut, animations: {
                 self.mainTopContraint.constant = -80
                 self.subTopConstraint.constant = -34
@@ -167,10 +189,23 @@ class VyseViewController:UIViewController, UITextViewDelegate {
             } else {
                 foodImage.image = UIImage(named: "MainBackground.png")
             }
+            
+            // Rating Information
+            var ratingString: String
+            
+            if let ratingNum = objectVenue?["rating"].number {
+                ratingString = prefix(ratingNum.stringValue, 3)
+            } else {
+                ratingString = "?.?"
+            }
+            
+            ratingNumber.hidden = false
+            ratingNumber.text = "Rating: " + ratingString
         }
         
         // Restaurant Name
         restaurantName.text = objectVenue?["name"].string
+        venueName = objectVenue?["name"].stringValue
         
         // Restaurant Number if Any
         if let phone = objectVenue?["contact"]["formattedPhone"].string {
@@ -223,17 +258,6 @@ class VyseViewController:UIViewController, UITextViewDelegate {
         }
         
         time.text = hoursString
-        
-        // Rating Information
-        var ratingString: String
-        
-        if let ratingNum = objectVenue?["rating"].number {
-            ratingString = prefix(ratingNum.stringValue, 3)
-        } else {
-            ratingString = "?.?"
-        }
-        
-        ratingNumber.text = "Rating: " + ratingString
         
         // Category Information
         var categoryInfo = ""
@@ -300,6 +324,27 @@ class VyseViewController:UIViewController, UITextViewDelegate {
             sharedFoursquareProcesses.addRemoveGet(true, adding:nil, saving: false, venueID: nil)
         } else if button!.tag == 7 {
             sharedFoursquareProcesses.addRemoveGet(true, adding:nil, saving: true, venueID: nil)
+        }
+    }
+    
+    // Location Button Pressed
+    @IBAction func locationButtonPressed(sender: AnyObject) {
+        if let location = sharedFoursquareProcesses.venues[sharedFoursquareProcesses.currentValue]["venue"]["location"].dictionary {
+            var latitute:CLLocationDegrees = location["lat"]!.doubleValue
+            var longitute:CLLocationDegrees = location["lng"]!.doubleValue
+            
+            let regionDistance:CLLocationDistance = 10000
+            var coordinates = CLLocationCoordinate2DMake(latitute, longitute)
+            let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+            var options = [
+                MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
+                MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: regionSpan.span),
+            ]
+            var placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+            var mapItem = MKMapItem(placemark: placemark)
+            mapItem.name = "\(venueName)"
+            mapItem.openInMapsWithLaunchOptions(options)
+
         }
     }
 }

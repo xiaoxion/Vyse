@@ -21,7 +21,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     var locationManager: CLLocationManager!
     
     let distanceFormatter = MKDistanceFormatter()
-    let pickerData = [["Mexican","Chinese","American","Japanese","Italian"]]
+    let pickerData = [["Mexican","Chinese","American","Japanese","Italian", "Fast Food", "Latin", "Greek", "German", "Thai", "French", "Colombian", "American"]]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +30,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         addLogoToTitleBar()
         locationManagerChecker()
         
-        if sharedFoursquareProcesses.checkAuthorized() && sharedFoursquareProcesses.checkReachibility() {
-            sharedFoursquareProcesses.checkLists()
+        if sharedFoursquareProcesses.checkAuthorized() {
             loggingButton.image = nil
             loggingButton.title = "Log Out"
+            
+            if sharedFoursquareProcesses.checkReachibility() {
+                sharedFoursquareProcesses.checkLists()
+            }
         }
     }
     
