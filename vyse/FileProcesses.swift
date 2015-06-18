@@ -86,6 +86,15 @@ class FileProcesses {
             return content.writeToFile(documentsPath + favoriteFile, atomically: true, encoding: encoding, error: nil)
         }
     }
+    
+    func delete(saving: Bool) {
+        var save = favoriteFile
+        if saving {
+            save = saveFile
+        }
+        
+        NSFileManager.defaultManager().removeItemAtPath(documentsPath + save, error: nil)
+    }
 }
 
 let sharedFileProcesses = FileProcesses()

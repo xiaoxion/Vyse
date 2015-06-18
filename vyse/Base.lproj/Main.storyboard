@@ -547,7 +547,7 @@
                                             <action selector="buttonPressed:" destination="9e4-qC-gmG" eventType="touchUpInside" id="XeS-Xc-XG3"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VyseOutline.png" translatesAutoresizingMaskIntoConstraints="NO" id="HhT-uG-lKR">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VyseFriendOutline.png" translatesAutoresizingMaskIntoConstraints="NO" id="HhT-uG-lKR">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                     </imageView>
                                 </subviews>
@@ -589,7 +589,6 @@
                                     </constraint>
                                     <constraint firstAttribute="width" secondItem="AJw-UO-pmt" secondAttribute="height" multiplier="1:1" id="s2k-CP-g3W"/>
                                     <constraint firstItem="7fz-Ss-IRG" firstAttribute="leading" secondItem="AJw-UO-pmt" secondAttribute="leading" id="yId-7X-Ucb"/>
-                                    <constraint firstAttribute="trailing" secondItem="7fz-Ss-IRG" secondAttribute="trailing" id="ySD-dg-OYb"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
@@ -621,7 +620,6 @@
                                         <exclude reference="DTc-av-Dyf"/>
                                         <exclude reference="Pbv-cB-p1W"/>
                                         <exclude reference="yId-7X-Ucb"/>
-                                        <exclude reference="ySD-dg-OYb"/>
                                         <exclude reference="SSN-VZ-9Cq"/>
                                         <exclude reference="YIO-nA-xem"/>
                                         <exclude reference="bcC-It-5Dl"/>
@@ -662,7 +660,6 @@
                                         <include reference="DTc-av-Dyf"/>
                                         <include reference="Pbv-cB-p1W"/>
                                         <include reference="yId-7X-Ucb"/>
-                                        <include reference="ySD-dg-OYb"/>
                                         <include reference="SSN-VZ-9Cq"/>
                                         <include reference="YIO-nA-xem"/>
                                         <include reference="bcC-It-5Dl"/>
@@ -930,8 +927,7 @@
                                         <exclude reference="bKg-8A-4Df"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="25" y="430" width="350" height="350"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="iZy-ob-P2J"/>
                                         <include reference="isk-HW-IWt"/>
@@ -1042,6 +1038,7 @@
                         <outlet property="WebsiteURL" destination="R5A-vC-aIN" id="vmG-hB-gDr"/>
                         <outlet property="addressLine" destination="isk-HW-IWt" id="PGU-Av-Pfz"/>
                         <outlet property="cityStateZip" destination="u9A-W8-j38" id="oIv-fk-aqq"/>
+                        <outlet property="favoriteButton" destination="9Ig-Bv-uw2" id="ajz-2c-rFs"/>
                         <outlet property="foodImage" destination="7fz-Ss-IRG" id="TDH-Zc-YI9"/>
                         <outlet property="foodType" destination="9tZ-m3-HE4" id="an2-Fn-igc"/>
                         <outlet property="leftMainView" destination="IVo-Sn-Phw" id="ruP-HQ-opb"/>
@@ -1054,6 +1051,7 @@
                         <outlet property="restaurantName" destination="yms-78-r82" id="c8d-Tx-3KF"/>
                         <outlet property="reviewTextView" destination="5fz-gU-Uo0" id="eCD-Lp-Xh1"/>
                         <outlet property="rightMiainView" destination="yGJ-wY-mS4" id="Ok2-cr-B5k"/>
+                        <outlet property="saveButton" destination="m7S-HJ-52X" id="iTh-2W-Udi"/>
                         <outlet property="subTopConstraint" destination="oOU-uW-Use" id="nfH-Ub-mxg"/>
                         <outlet property="subView" destination="Qei-BL-T7e" id="aaS-bQ-Vmv"/>
                         <outlet property="submitButton" destination="WFF-Ka-tTl" id="5GG-Ar-5fp"/>
@@ -1235,6 +1233,7 @@
         <image name="MainBackground.png" width="400" height="400"/>
         <image name="Male50.png" width="24" height="24"/>
         <image name="VyseButton.png" width="200" height="60"/>
+        <image name="VyseFriendOutline.png" width="400" height="400"/>
         <image name="VyseOutline.png" width="400" height="400"/>
         <image name="VyseSubBackground.png" width="400" height="400"/>
         <image name="like-50.png" width="50" height="50"/>

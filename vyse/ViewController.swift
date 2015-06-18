@@ -18,10 +18,20 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var priceControl: UISegmentedControl!
     @IBOutlet weak var loggingButton: UIBarButtonItem!
     
+    var selectedGenre = 0
     var locationManager: CLLocationManager!
-    
     let distanceFormatter = MKDistanceFormatter()
-    let pickerData = [["Mexican","Chinese","American","Japanese","Italian", "Fast Food", "Latin", "Greek", "German", "Thai", "French", "Colombian", "American"]]
+    
+    // Food Genres
+    let pickerData = ["General", "Global", "American", "Latin", "European", "Asian", "Islands"]
+    let generalData = ["Fast Food", "Coffee Shop", "Dessert Shop", "Steak House", "Seafood" , "Vegetarian", "Bakery", "Breakfast Spots", "Buffet"]
+    let globalData = ["American", "Latin American", "European", "Asian", "African", "Indian"]
+    let americanData = ["New American", "Southern", "Hawaiian", "BBQ Joint", "Burger Joint"]
+    let latinData = ["Argentinian", "Brazilian", "Cuban", "Mexican", "Peruvian"]
+    let europeanData = ["Austrian", "Eastern European", "English", "French", "German", "Greek", "Irish Pub", "Italian", "Mediterranean", "Modern European", "Portuguese", "Spanish", "Swiss"]
+    let asianData = ["Chinese", "Filipino", "Japanese", "Sushi", "Korean", "Thai", "Vietnamese"]
+    let islandsData = ["Australian", "Cajun / Creole"]
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,23 +73,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         return false
     }
     
-    // Picker Data and Logic
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return pickerData.count;
-    }
-    
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData[component].count
-    }
-
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return pickerData[component][row]
-    }
-    
-    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        return NSAttributedString(string: pickerData[component][row], attributes: [NSForegroundColorAttributeName:UIColor(red: CGFloat(49/255.0), green: CGFloat(120/255.0), blue: CGFloat(178/255.0), alpha: CGFloat(1.0))])
-    }
-    
     // Add Logo to Title Bar
     func addLogoToTitleBar() {
         let logoImage = UIImage(named: "Vyse.png")
@@ -107,9 +100,76 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
     }
     
+    // MARK: Picker Data
+    // Picker Data and Logic
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 2;
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if component == 0 {
+            return pickerData.count
+        } else {
+            switch selectedGenre {
+            case 0:
+                return generalData.count
+            case 1:
+                return globalData.count
+            case 2:
+                return americanData.count
+            case 3:
+                return latinData.count
+            case 4:
+                return europeanData.count
+            case 5:
+                return asianData.count
+            case 6:
+                return islandsData.count
+                
+            default:
+                return 0
+            }
+        }
+    }
+    
+    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        if component == 0 {
+            return NSAttributedString(string: pickerData[row], attributes: [NSForegroundColorAttributeName:UIColor(red: CGFloat(49/255.0), green: CGFloat(120/255.0), blue: CGFloat(178/255.0), alpha: CGFloat(1.0))])
+        } else {
+            var theString = ""
+            switch selectedGenre {
+            case 0:
+                theString = generalData[row]
+            case 1:
+                theString = globalData[row]
+            case 2:
+                theString = americanData[row]
+            case 3:
+                theString = latinData[row]
+            case 4:
+                theString = europeanData[row]
+            case 5:
+                theString = asianData[row]
+            case 6:
+                theString = islandsData[row]
+                
+            default:
+                theString = "Error"
+            }
+            
+            return NSAttributedString(string: theString, attributes: [NSForegroundColorAttributeName:UIColor(red: CGFloat(49/255.0), green: CGFloat(120/255.0), blue: CGFloat(178/255.0), alpha: CGFloat(1.0))])
+        }
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if component == 0 {
+            selectedGenre = row
+            pickerView.reloadComponent(1)
+            pickerView.selectRow(0, inComponent: 1, animated: false)
+        }
+    }
     
     // MARK: Actionable Data
-    
     // Add Location Button Logic
     @IBAction func addLocationButton() {
         locationManager.startUpdatingLocation()
@@ -147,16 +207,14 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             }
             
             parameters += [Parameter.m: "swarm"]
-            parameters += [Parameter.query:pickerData[0][myPicker.selectedRowInComponent(0)]]
             parameters += [Parameter.near:locationText.text]
             parameters += [Parameter.venuePhotos:"1"]
             parameters += [Parameter.price: String(priceControl.selectedSegmentIndex + 1)]
+            parameters += [Parameter.query: myPicker.delegate!.pickerView!(myPicker, attributedTitleForRow: myPicker.selectedRowInComponent(1), forComponent: 1)!.string]
             
-            var isSearching: Bool
+            var isSearching = false
             if button?.tag == 0 {
                 isSearching = true
-            } else{
-                isSearching = false
             }
             
             sharedFoursquareProcesses.indexedPath = nil
@@ -184,6 +242,19 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 sharedFoursquareProcesses.checkLists()
                 self.loggingButton.image = nil
                 self.loggingButton.title = "Log Out"
+                
+                // Export local save/favorites
+                if sharedFileProcesses.exists(true) {
+                    if let daJSON = sharedFileProcesses.read(true) {
+                        sharedFoursquareProcesses.exportLocal(daJSON, saving: true)
+                    }
+                }
+                
+                if sharedFileProcesses.exists(false) {
+                    if let daJSON = sharedFileProcesses.read(false) {
+                        sharedFoursquareProcesses.exportLocal(daJSON, saving: false)
+                    }
+                }
             }
         } else {
             logOutAlert()

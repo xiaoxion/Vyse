@@ -34,11 +34,16 @@ class VyseViewController:UIViewController, UITextViewDelegate {
     @IBOutlet weak var reviewTextView: UITextView!
     @IBOutlet weak var likeFoursquare: UIButton!
     @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
     
     var venueID: String!
     var number: String!
     var venueName: String!
     var tutorialNeeded = false
+    var addSaved = true
+    var addFavorite = true
+    var likedFoursquare = false
     
     override func viewDidLoad() {
         if sharedFoursquareProcesses.indexedPath != nil {
@@ -148,6 +153,10 @@ class VyseViewController:UIViewController, UITextViewDelegate {
     func fillData() {
         let objectVenue: JSON? = sharedFoursquareProcesses.venues[sharedFoursquareProcesses.currentValue]["venue"]
         
+        if sharedFoursquareProcesses.retrieveFromList || sharedFoursquareProcesses.retrieveFromLocal {
+            favoriteButton.hidden = true
+            saveButton.hidden = true
+        }
         // Get Image
         if sharedFoursquareProcesses.retrieveFromList {
             if let venuePhoto = sharedFoursquareProcesses.venues[sharedFoursquareProcesses.currentValue]["photo"].dictionary {
@@ -195,12 +204,26 @@ class VyseViewController:UIViewController, UITextViewDelegate {
             
             if let ratingNum = objectVenue?["rating"].number {
                 ratingString = prefix(ratingNum.stringValue, 3)
+                if count(ratingString) == 1 {
+                    ratingString = ratingString + ".0"
+                }
             } else {
                 ratingString = "?.?"
             }
             
             ratingNumber.hidden = false
             ratingNumber.text = "Rating: " + ratingString
+            
+            // Get Save/Favorite Status
+            if let reasonsObject = sharedFoursquareProcesses.venues[sharedFoursquareProcesses.currentValue]["reasons"]["items"][0].dictionary {
+                if reasonsObject["summary"]?.string == "On: VyséFavorites" {
+                    favoriteButton.setImage(UIImage(named: "like_filled-50.png"), forState: UIControlState.Normal)
+                    addFavorite = false
+                } else if reasonsObject["summary"]?.string == "On: VyséSaved" {
+                    saveButton.setImage(UIImage(named: "save_as_filled-50.png") , forState: UIControlState.Normal)
+                    addSaved = false
+                }
+            }
         }
         
         // Restaurant Name
@@ -243,7 +266,7 @@ class VyseViewController:UIViewController, UITextViewDelegate {
         addressLine.text = locationStringAddress
         cityStateZip.text = locationStringCityStateZip
         
-        // Open Data
+        // Hours Data
         var hoursString = "Closed Now"
         if let hours = objectVenue?["hours"] {
             if hours["isOpen"].boolValue {
@@ -268,6 +291,25 @@ class VyseViewController:UIViewController, UITextViewDelegate {
         }
         
         foodType.text = categoryInfo
+        
+        // Check if locale is socailly approved
+        if sharedFoursquareProcesses.checkAuthorized() {
+            if let reason = sharedFoursquareProcesses.venues[sharedFoursquareProcesses.currentValue]["reasons"]["items"][0].dictionary {
+                if reason["type"]!.stringValue == "social" {
+                    outlineImage.image = UIImage(named: "VyseFriendOutline.png")
+                } else {
+                    outlineImage.image = UIImage(named: "VyseOutline.png")
+                }
+            }
+            
+            // Get if current user likes place
+            likedFoursquare = objectVenue!["like"].boolValue
+            if likedFoursquare {
+                likeFoursquare.setImage(UIImage(named: "thumb_up_filled-50.png"), forState: UIControlState.Normal)
+                likedFoursquare = true
+                
+            }
+        }
         
         venueID = objectVenue?["id"].string
     }
@@ -295,35 +337,46 @@ class VyseViewController:UIViewController, UITextViewDelegate {
         // Button Logic
         if button!.tag == 2 {
             UIApplication.sharedApplication().openURL(NSURL(string: "tel://" + number)!)
+        } else if button!.tag == 3 {
+            UIApplication.sharedApplication().openURL(NSURL(string: (button?.titleLabel?.text)!)!)
         }
         
         // Like Content
         if sharedFoursquareProcesses.checkReachibility() {
-            if button!.tag == 3 {
-                UIApplication.sharedApplication().openURL(NSURL(string: (button?.titleLabel?.text)!)!)
-            } else if button!.tag == 4 {
-                sharedFoursquareProcesses.likeVenueWith(venueID);
-                likeFoursquare.imageView?.image = UIImage(named: "thumb_up_filled-50.png")
-                JLToast.makeText("Liked!").show()
+            // Set Controller as Self for segues
+            sharedFoursquareProcesses.callingViewController = self
+            
+            if button!.tag == 4 {
+                sharedFoursquareProcesses.likeVenueWith(venueID, currentStatus:likedFoursquare);
             } else if button!.tag == 5 {
                 sharedFoursquareProcesses.tipVenueWith(venueID, tipText: reviewTextView.text)
                 reviewTextView.text = ""
                 JLToast.makeText("Tip left!").show()
             }
+            
+            // Add/Remove Data
+            else if button!.tag == 0 {
+                if !addSaved && addFavorite {
+                    JLToast.makeText("Cannot Favorite if Saved").show()
+                    return
+                }
+                sharedFoursquareProcesses.addRemoveGet(false, adding:addFavorite, saving: false, venueID: venueID)
+            } else if button!.tag == 1 {
+                if !addFavorite && addSaved {
+                    JLToast.makeText("Cannot Save if Favorited").show()
+                    return
+                }
+                sharedFoursquareProcesses.addRemoveGet(false, adding:addSaved, saving: true, venueID: venueID)
+            }
+            
+            // Getting Data
+            else if button!.tag == 6 {
+                sharedFoursquareProcesses.addRemoveGet(true, adding:nil, saving: false, venueID: nil)
+            } else if button!.tag == 7 {
+                sharedFoursquareProcesses.addRemoveGet(true, adding:nil, saving: true, venueID: nil)
+            }
         } else {
             JLToast.makeText("Error, check internet connection!").show()
-        }
-        
-        // Set Controller as Self for segues
-        sharedFoursquareProcesses.callingViewController = self
-        if button!.tag == 0 {
-            sharedFoursquareProcesses.addRemoveGet(false, adding:true, saving: false, venueID: venueID)
-        } else if button!.tag == 1 {
-            sharedFoursquareProcesses.addRemoveGet(false, adding:true, saving: true, venueID: venueID)
-        } else if button!.tag == 6 {
-            sharedFoursquareProcesses.addRemoveGet(true, adding:nil, saving: false, venueID: nil)
-        } else if button!.tag == 7 {
-            sharedFoursquareProcesses.addRemoveGet(true, adding:nil, saving: true, venueID: nil)
         }
     }
     
