@@ -404,7 +404,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="XXj-4o-Qjq">
-                        <barButtonItem key="rightBarButtonItem" image="Male50.png" style="done" id="r8c-rI-8MQ">
+                        <barButtonItem key="rightBarButtonItem" title="Login" style="plain" id="r8c-rI-8MQ">
                             <color key="tintColor" red="0.86274509803921573" green="0.83529411764705885" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="barItemPressed" destination="QwQ-Ag-UIO" id="gCF-cr-gDa"/>
@@ -1097,7 +1097,7 @@
                                                 </mask>
                                             </variation>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9.8" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VMO-zp-iKE">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="9.8" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VMO-zp-iKE">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="highlightedColor"/>
@@ -1114,7 +1114,7 @@
                                             <color key="textColor" red="0.14117647059999999" green="0.38823529410000002" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VyseOutline.png" translatesAutoresizingMaskIntoConstraints="NO" id="EtM-86-TLP">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="VyseOutline.png" translatesAutoresizingMaskIntoConstraints="NO" id="EtM-86-TLP">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         </imageView>
                                     </subviews>
@@ -1231,7 +1231,6 @@
     <resources>
         <image name="Lamb.jpg" width="1698" height="1131"/>
         <image name="MainBackground.png" width="400" height="400"/>
-        <image name="Male50.png" width="24" height="24"/>
         <image name="VyseButton.png" width="200" height="60"/>
         <image name="VyseFriendOutline.png" width="400" height="400"/>
         <image name="VyseOutline.png" width="400" height="400"/>
@@ -1248,7 +1247,7 @@
         <image name="thumb_up_filled-50.png" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="OAf-vz-jVK"/>
         <segue reference="HtD-8B-l0s"/>
-        <segue reference="t5d-ax-5kG"/>
     </inferredMetricsTieBreakers>
 </document>

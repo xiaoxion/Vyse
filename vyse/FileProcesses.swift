@@ -81,9 +81,9 @@ class FileProcesses {
     
     func write(saving: Bool, content: String, encoding: NSStringEncoding = NSUTF8StringEncoding) -> Bool {
         if saving {
-            return content.writeToFile(documentsPath + saveFile, atomically: true, encoding: encoding, error: nil)
+            return content.writeToFile(documentsPath + "/" + saveFile, atomically: true, encoding: encoding, error: nil)
         } else {
-            return content.writeToFile(documentsPath + favoriteFile, atomically: true, encoding: encoding, error: nil)
+            return content.writeToFile(documentsPath + "/" + favoriteFile, atomically: true, encoding: encoding, error: nil)
         }
     }
     

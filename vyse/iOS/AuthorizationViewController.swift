@@ -62,6 +62,9 @@ public class AuthorizationViewController : UIViewController, UIWebViewDelegate {
         
         let cancelButton = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: Selector("cancelButtonTapped"))
         self.navigationItem.leftBarButtonItem = cancelButton
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor(hex: "E8E1C4")
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.Black
+        self.navigationController?.navigationBar.barTintColor = UIColor(hex: "1B6CB5")
         if shouldControllNetworkActivityIndicator {
             networkActivityIndicator = NetworkActivityIndicatorController()
         }

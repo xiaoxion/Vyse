@@ -109,6 +109,10 @@ class VyseViewController:UIViewController, UITextViewDelegate {
                     self.subView.layoutIfNeeded()
                     }, completion: {
                         (value:Bool) in
+                        
+                        self.addSaved = true
+                        self.addFavorite = true
+                        self.likedFoursquare = false
                         UIView.animateWithDuration(0.1, delay: 0.0, options: .CurveEaseOut, animations: {
                             self.fillData()
                             self.leftMainView.constant = 9
@@ -157,6 +161,7 @@ class VyseViewController:UIViewController, UITextViewDelegate {
             favoriteButton.hidden = true
             saveButton.hidden = true
         }
+        
         // Get Image
         if sharedFoursquareProcesses.retrieveFromList {
             if let venuePhoto = sharedFoursquareProcesses.venues[sharedFoursquareProcesses.currentValue]["photo"].dictionary {

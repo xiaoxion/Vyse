@@ -10,6 +10,6 @@ import UIKit
 
 class NavigationController: UINavigationController {
     override func viewDidLoad() {
-        self.navigationBar.barStyle = UIBarStyle.Black;
+        self.navigationBar.barStyle = UIBarStyle.Black
     }
 }

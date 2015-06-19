@@ -240,20 +240,23 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             sharedFoursquareProcesses.session.authorizeWithViewController(self, delegate: self) {
             (authorized, error) -> Void in
                 sharedFoursquareProcesses.checkLists()
-                self.loggingButton.image = nil
-                self.loggingButton.title = "Log Out"
                 
-                // Export local save/favorites
-                if sharedFileProcesses.exists(true) {
-                    if let daJSON = sharedFileProcesses.read(true) {
-                        sharedFoursquareProcesses.exportLocal(daJSON, saving: true)
+                if authorized {
+                    self.loggingButton.title = "Log Out"
+                    
+                    // Export local save/favorites
+                    if sharedFileProcesses.exists(true) {
+                        if let daJSON = sharedFileProcesses.read(true) {
+                            sharedFoursquareProcesses.exportLocal(daJSON, saving: true)
+                        }
                     }
-                }
-                
-                if sharedFileProcesses.exists(false) {
-                    if let daJSON = sharedFileProcesses.read(false) {
-                        sharedFoursquareProcesses.exportLocal(daJSON, saving: false)
+                    
+                    if sharedFileProcesses.exists(false) {
+                        if let daJSON = sharedFileProcesses.read(false) {
+                            sharedFoursquareProcesses.exportLocal(daJSON, saving: false)
+                        }
                     }
+
                 }
             }
         } else {
@@ -266,8 +269,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         let confrim = UIAlertAction(title: "Confirm", style: .Destructive, handler: {
             (action) -> Void in
             sharedFoursquareProcesses.session.deauthorize()
-            self.loggingButton.title = ""
-            self.loggingButton.image = UIImage(named: "Male50.png")
+            self.loggingButton.title = "Login"
             self.dismissViewControllerAnimated(true, completion: nil)
         })
         let cancel = UIAlertAction(title: "Cancel", style: .Default, handler: {
