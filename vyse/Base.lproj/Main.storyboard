@@ -318,7 +318,7 @@
                                     <constraint firstAttribute="height" constant="44" id="jp9-q2-vnA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <inset key="titleEdgeInsets" minX="-12" minY="20" maxX="12" maxY="-10"/>
+                                <inset key="titleEdgeInsets" minX="-13" minY="20" maxX="13" maxY="-10"/>
                                 <inset key="imageEdgeInsets" minX="27" minY="-10" maxX="-27" maxY="0.0"/>
                                 <state key="normal" title=" Favorites" image="like_filled-25.png">
                                     <color key="titleColor" red="0.8862745098" green="0.85882352939999995" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -547,7 +547,7 @@
                                             <action selector="buttonPressed:" destination="9e4-qC-gmG" eventType="touchUpInside" id="XeS-Xc-XG3"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VyseFriendOutline.png" translatesAutoresizingMaskIntoConstraints="NO" id="HhT-uG-lKR">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VyseOutline.png" translatesAutoresizingMaskIntoConstraints="NO" id="HhT-uG-lKR">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                     </imageView>
                                 </subviews>
@@ -679,8 +679,11 @@
                                         <variation key="heightClass=regular-widthClass=compact" constant="44"/>
                                     </constraint>
                                 </constraints>
-                                <state key="normal" image="save_as_filled-25.png">
-                                    <color key="titleColor" red="0.14117647059999999" green="0.38823529410000002" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <inset key="contentEdgeInsets" minX="-16" minY="20" maxX="16" maxY="-10"/>
+                                <inset key="imageEdgeInsets" minX="70" minY="-15" maxX="-43" maxY="26"/>
+                                <state key="normal" title="Saved for Later" image="save_as_filled-25.png">
+                                    <color key="titleColor" red="0.86274509799999999" green="0.83529411760000005" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="default">
@@ -703,8 +706,11 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="fsy-uf-QdK"/>
                                 </constraints>
-                                <state key="normal" image="like_filled-25.png">
-                                    <color key="titleColor" red="0.14117647059999999" green="0.38823529410000002" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <inset key="titleEdgeInsets" minX="-8" minY="20" maxX="13" maxY="-10"/>
+                                <inset key="imageEdgeInsets" minX="27" minY="-10" maxX="-27" maxY="0.0"/>
+                                <state key="normal" title="Favorites" image="like_filled-25.png">
+                                    <color key="titleColor" red="0.86274509799999999" green="0.83529411760000005" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="default">
@@ -1232,7 +1238,6 @@
         <image name="Lamb.jpg" width="1698" height="1131"/>
         <image name="MainBackground.png" width="400" height="400"/>
         <image name="VyseButton.png" width="200" height="60"/>
-        <image name="VyseFriendOutline.png" width="400" height="400"/>
         <image name="VyseOutline.png" width="400" height="400"/>
         <image name="VyseSubBackground.png" width="400" height="400"/>
         <image name="like-50.png" width="50" height="50"/>
@@ -1247,7 +1252,7 @@
         <image name="thumb_up_filled-50.png" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OAf-vz-jVK"/>
         <segue reference="HtD-8B-l0s"/>
+        <segue reference="t5d-ax-5kG"/>
     </inferredMetricsTieBreakers>
 </document>

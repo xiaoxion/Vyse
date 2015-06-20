@@ -40,7 +40,8 @@ class VyseViewController:UIViewController, UITextViewDelegate {
     var venueID: String!
     var number: String!
     var venueName: String!
-    var tutorialNeeded = false
+    var tutorialNeededRight = false
+    var tutorialNeededUp = false
     var addSaved = true
     var addFavorite = true
     var likedFoursquare = false
@@ -52,8 +53,9 @@ class VyseViewController:UIViewController, UITextViewDelegate {
         
         var data = NSMutableDictionary(contentsOfFile: NSBundle.mainBundle().pathForResource("Data", ofType: "plist")!)
         if data?.objectForKey("isTutorialNeeded") as! Bool {
-            tutorialNeeded = true
-            outlineImage.image = UIImage(named: "VyseTutorial.png")
+            tutorialNeededRight = true
+            tutorialNeededUp = true
+            outlineImage.image = UIImage(named: "VyseSwipeUp.png")
             data?.setObject(false, forKey: "isTutorialNeeded")
             data?.writeToFile(NSBundle.mainBundle().pathForResource("Data", ofType: "plist")!, atomically: false)
         }
@@ -95,9 +97,13 @@ class VyseViewController:UIViewController, UITextViewDelegate {
             if sharedFoursquareProcesses.currentValue < (sharedFoursquareProcesses.venues.count - 1) {
                 sharedFoursquareProcesses.currentValue = sharedFoursquareProcesses.currentValue + 1
                 
-                if tutorialNeeded {
-                    tutorialNeeded = false
-                    outlineImage.image = UIImage(named: "VyseOutline.png")
+                if tutorialNeededRight {
+                    tutorialNeededRight = false
+                    if tutorialNeededUp {
+                        outlineImage.image = UIImage(named: "VyseSwipeUp.png")
+                    } else {
+                        outlineImage.image = UIImage(named: "VyseOutline.png")
+                    }
                 }
                 
                 UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {
@@ -124,9 +130,13 @@ class VyseViewController:UIViewController, UITextViewDelegate {
                 JLToast.makeText("No More Results").show()
             }
         } else if sender.direction == .Up {
-            if tutorialNeeded {
-                tutorialNeeded = false
-                outlineImage.image = UIImage(named: "VyseOutline.png")
+            if tutorialNeededUp {
+                tutorialNeededUp = false
+                if tutorialNeededRight {
+                    outlineImage.image = UIImage(named: "VyseSwipeRight.png")
+                } else {
+                    outlineImage.image = UIImage(named: "VyseOutline.png")
+                }
             }
             UIView.animateWithDuration(0.45, delay: 0.0, options: .CurveEaseOut, animations: {
                 self.mainTopContraint.constant = -80

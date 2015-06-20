@@ -10,6 +10,11 @@ import UIKit
 import SwiftyJSON
 
 class ListViewController: UITableViewController {
+    override func viewDidLoad() {
+        if sharedFoursquareProcesses.retrieveFromList || sharedFoursquareProcesses.retrieveFromLocal {
+            
+        }
+    }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if sharedFoursquareProcesses.venues == nil {

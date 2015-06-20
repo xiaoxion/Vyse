@@ -17,6 +17,8 @@
 		0F04A3E01B0D334800FDD33F /* Lamb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F04A3DF1B0D334800FDD33F /* Lamb.jpg */; };
 		0F04A3E31B0D47D900FDD33F /* Vyse.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F04A3E21B0D47D900FDD33F /* Vyse.png */; };
 		0F63EFD41B156ADD009605A6 /* Male50.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F63EFD31B156ADD009605A6 /* Male50.png */; };
+		0FA48B0B1B36098600AC2069 /* VyseSwipeRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA48B091B36098600AC2069 /* VyseSwipeRight.png */; };
+		0FA48B0C1B36098600AC2069 /* VyseSwipeUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA48B0A1B36098600AC2069 /* VyseSwipeUp.png */; };
 		0FB32F351B2691E2002045B3 /* VyseOutline.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FB32F341B2691E2002045B3 /* VyseOutline.png */; };
 		0FBECD0A1B28E636002FCE6E /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBECD091B28E636002FCE6E /* Reachability.swift */; };
 		0FC7681C1B17B62E00A3AD7E /* VyseSquareButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FC7681B1B17B62E00A3AD7E /* VyseSquareButton.png */; };
@@ -56,7 +58,6 @@
 		0FD7F8021B1E5ADD00808B05 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD7F7E21B1E5ADD00808B05 /* Task.swift */; };
 		0FD7F8041B1E5D0100808B05 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD7F8031B1E5D0100808B05 /* CoreLocation.framework */; };
 		0FD7F8061B1E5F0900808B05 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FD7F8051B1E5F0900808B05 /* MapKit.framework */; };
-		0FEBBCAC1B2E42B5002A0BF5 /* VyseTutorial.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FEBBCAB1B2E42B5002A0BF5 /* VyseTutorial.png */; };
 		0FEBBCAE1B2E4CF9002A0BF5 /* map_marker-25.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FEBBCAD1B2E4CF9002A0BF5 /* map_marker-25.png */; };
 		0FEBBCB01B2E5147002A0BF5 /* Data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0FEBBCAF1B2E5147002A0BF5 /* Data.plist */; };
 		0FF2C4971B30CBAC001666B4 /* VyseFriendOutline.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FF2C4961B30CBAC001666B4 /* VyseFriendOutline.png */; };
@@ -105,6 +106,8 @@
 		0F04A3DF1B0D334800FDD33F /* Lamb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Lamb.jpg; sourceTree = "<group>"; };
 		0F04A3E21B0D47D900FDD33F /* Vyse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Vyse.png; sourceTree = "<group>"; };
 		0F63EFD31B156ADD009605A6 /* Male50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Male50.png; sourceTree = "<group>"; };
+		0FA48B091B36098600AC2069 /* VyseSwipeRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VyseSwipeRight.png; sourceTree = "<group>"; };
+		0FA48B0A1B36098600AC2069 /* VyseSwipeUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VyseSwipeUp.png; sourceTree = "<group>"; };
 		0FB32F341B2691E2002045B3 /* VyseOutline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VyseOutline.png; sourceTree = "<group>"; };
 		0FBECD091B28E636002FCE6E /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		0FC7681B1B17B62E00A3AD7E /* VyseSquareButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VyseSquareButton.png; sourceTree = "<group>"; };
@@ -144,7 +147,6 @@
 		0FD7F7E21B1E5ADD00808B05 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		0FD7F8031B1E5D0100808B05 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0FD7F8051B1E5F0900808B05 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		0FEBBCAB1B2E42B5002A0BF5 /* VyseTutorial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VyseTutorial.png; sourceTree = "<group>"; };
 		0FEBBCAD1B2E4CF9002A0BF5 /* map_marker-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_marker-25.png"; sourceTree = "<group>"; };
 		0FEBBCAF1B2E5147002A0BF5 /* Data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Data.plist; sourceTree = "<group>"; };
 		0FF2C4961B30CBAC001666B4 /* VyseFriendOutline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VyseFriendOutline.png; sourceTree = "<group>"; };
@@ -264,7 +266,8 @@
 				0F04A3E21B0D47D900FDD33F /* Vyse.png */,
 				0FB32F341B2691E2002045B3 /* VyseOutline.png */,
 				0FF2C4961B30CBAC001666B4 /* VyseFriendOutline.png */,
-				0FEBBCAB1B2E42B5002A0BF5 /* VyseTutorial.png */,
+				0FA48B091B36098600AC2069 /* VyseSwipeRight.png */,
+				0FA48B0A1B36098600AC2069 /* VyseSwipeUp.png */,
 				0F04A3DF1B0D334800FDD33F /* Lamb.jpg */,
 			);
 			name = image;
@@ -472,7 +475,6 @@
 			files = (
 				0FF6D6561B1663B80096E0B2 /* location_filled-100.png in Resources */,
 				0F04A3BD1B0D05FA00FDD33F /* Main.storyboard in Resources */,
-				0FEBBCAC1B2E42B5002A0BF5 /* VyseTutorial.png in Resources */,
 				0FC7681C1B17B62E00A3AD7E /* VyseSquareButton.png in Resources */,
 				0F04A3C21B0D05FA00FDD33F /* LaunchScreen.xib in Resources */,
 				0FF6D6691B16D2670096E0B2 /* like-50.png in Resources */,
@@ -484,10 +486,12 @@
 				0F04A3E31B0D47D900FDD33F /* Vyse.png in Resources */,
 				0F63EFD41B156ADD009605A6 /* Male50.png in Resources */,
 				0FF6D6661B16D2670096E0B2 /* save_as-50.png in Resources */,
+				0FA48B0B1B36098600AC2069 /* VyseSwipeRight.png in Resources */,
 				0FF6D6541B1662760096E0B2 /* MainBackground.png in Resources */,
 				0F04A3BF1B0D05FA00FDD33F /* Images.xcassets in Resources */,
 				0FF6D6681B16D2670096E0B2 /* save_as_filled-50.png in Resources */,
 				0FEBBCAE1B2E4CF9002A0BF5 /* map_marker-25.png in Resources */,
+				0FA48B0C1B36098600AC2069 /* VyseSwipeUp.png in Resources */,
 				0FF6D6581B166A580096E0B2 /* VyseButton.png in Resources */,
 				0F04A3E01B0D334800FDD33F /* Lamb.jpg in Resources */,
 				0FD7F7E51B1E5ADD00808B05 /* AuthorizationViewController.xib in Resources */,
