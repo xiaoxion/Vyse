@@ -20,6 +20,7 @@
 		0FA48B0B1B36098600AC2069 /* VyseSwipeRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA48B091B36098600AC2069 /* VyseSwipeRight.png */; };
 		0FA48B0C1B36098600AC2069 /* VyseSwipeUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA48B0A1B36098600AC2069 /* VyseSwipeUp.png */; };
 		0FB32F351B2691E2002045B3 /* VyseOutline.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FB32F341B2691E2002045B3 /* VyseOutline.png */; };
+		0FB74A2A1B3880CB00D7DA03 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB74A291B3880CB00D7DA03 /* MapViewController.swift */; };
 		0FBECD0A1B28E636002FCE6E /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBECD091B28E636002FCE6E /* Reachability.swift */; };
 		0FC7681C1B17B62E00A3AD7E /* VyseSquareButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FC7681B1B17B62E00A3AD7E /* VyseSquareButton.png */; };
 		0FC7681F1B17B78200A3AD7E /* like_filled-25.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FC7681D1B17B78200A3AD7E /* like_filled-25.png */; };
@@ -109,6 +110,7 @@
 		0FA48B091B36098600AC2069 /* VyseSwipeRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VyseSwipeRight.png; sourceTree = "<group>"; };
 		0FA48B0A1B36098600AC2069 /* VyseSwipeUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VyseSwipeUp.png; sourceTree = "<group>"; };
 		0FB32F341B2691E2002045B3 /* VyseOutline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VyseOutline.png; sourceTree = "<group>"; };
+		0FB74A291B3880CB00D7DA03 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		0FBECD091B28E636002FCE6E /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		0FC7681B1B17B62E00A3AD7E /* VyseSquareButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = VyseSquareButton.png; sourceTree = "<group>"; };
 		0FC7681D1B17B78200A3AD7E /* like_filled-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "like_filled-25.png"; sourceTree = "<group>"; };
@@ -351,8 +353,9 @@
 			children = (
 				0F04A3D91B0D07BF00FDD33F /* NavigationController.swift */,
 				0F04A3B91B0D05FA00FDD33F /* ViewController.swift */,
-				0FF6D64F1B16207C0096E0B2 /* VyseViewController.swift */,
 				0FFB0E581B15055400DAC93A /* ListViewController.swift */,
+				0FF6D64F1B16207C0096E0B2 /* VyseViewController.swift */,
+				0FB74A291B3880CB00D7DA03 /* MapViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -596,6 +599,7 @@
 				0FF4A0101B2C8A17004C674B /* FileProcesses.swift in Sources */,
 				0FD7F8011B1E5ADD00808B05 /* Session.swift in Sources */,
 				0FD7F7E31B1E5ADD00808B05 /* Authorization.swift in Sources */,
+				0FB74A2A1B3880CB00D7DA03 /* MapViewController.swift in Sources */,
 				0FD7F7F41B1E5ADD00808B05 /* Specials.swift in Sources */,
 				0FD7F7FC1B1E5ADD00808B05 /* NetworkActivityIndicatorController.swift in Sources */,
 				0FD7F7EB1B1E5ADD00808B05 /* Checkins.swift in Sources */,

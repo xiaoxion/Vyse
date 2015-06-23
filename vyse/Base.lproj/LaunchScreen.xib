@@ -28,7 +28,7 @@
                 <constraint firstAttribute="centerX" secondItem="xPC-bx-4IW" secondAttribute="centerX" id="cVz-jn-7tC"/>
                 <constraint firstAttribute="centerY" secondItem="xPC-bx-4IW" secondAttribute="centerY" id="rpy-6Y-hHz"/>
             </constraints>
-            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="548" y="455"/>
         </view>

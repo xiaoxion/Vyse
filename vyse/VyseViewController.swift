@@ -39,7 +39,6 @@ class VyseViewController:UIViewController, UITextViewDelegate {
     
     var venueID: String!
     var number: String!
-    var venueName: String!
     var tutorialNeededRight = false
     var tutorialNeededUp = false
     var addSaved = true
@@ -59,8 +58,6 @@ class VyseViewController:UIViewController, UITextViewDelegate {
             data?.setObject(false, forKey: "isTutorialNeeded")
             data?.writeToFile(NSBundle.mainBundle().pathForResource("Data", ofType: "plist")!, atomically: false)
         }
-        
-        reviewTextView.delegate = self
         
         addLogoToTitleBar()
         addGestureRecognizers()
@@ -243,7 +240,6 @@ class VyseViewController:UIViewController, UITextViewDelegate {
         
         // Restaurant Name
         restaurantName.text = objectVenue?["name"].string
-        venueName = objectVenue?["name"].stringValue
         
         // Restaurant Number if Any
         if let phone = objectVenue?["contact"]["formattedPhone"].string {
@@ -392,27 +388,6 @@ class VyseViewController:UIViewController, UITextViewDelegate {
             }
         } else {
             JLToast.makeText("Error, check internet connection!").show()
-        }
-    }
-    
-    // Location Button Pressed
-    @IBAction func locationButtonPressed(sender: AnyObject) {
-        if let location = sharedFoursquareProcesses.venues[sharedFoursquareProcesses.currentValue]["venue"]["location"].dictionary {
-            var latitute:CLLocationDegrees = location["lat"]!.doubleValue
-            var longitute:CLLocationDegrees = location["lng"]!.doubleValue
-            
-            let regionDistance:CLLocationDistance = 10000
-            var coordinates = CLLocationCoordinate2DMake(latitute, longitute)
-            let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
-            var options = [
-                MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
-                MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: regionSpan.span),
-            ]
-            var placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
-            var mapItem = MKMapItem(placemark: placemark)
-            mapItem.name = "\(venueName)"
-            mapItem.openInMapsWithLaunchOptions(options)
-
         }
     }
 }

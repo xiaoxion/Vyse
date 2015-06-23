@@ -776,6 +776,9 @@
                                                 <include reference="4Yi-KE-gW3"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <outlet property="delegate" destination="9e4-qC-gmG" id="cf7-v8-c1f"/>
+                                        </connections>
                                     </textView>
                                     <button hidden="YES" opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5BU-rE-1yb">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -852,7 +855,7 @@
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <action selector="locationButtonPressed:" destination="9e4-qC-gmG" eventType="touchUpInside" id="jco-9r-ple"/>
+                                            <segue destination="Zg4-Xd-IbW" kind="show" id="5fB-CY-s6f"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City, State ZipCode" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u9A-W8-j38">
@@ -933,7 +936,8 @@
                                         <exclude reference="bKg-8A-4Df"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="25" y="430" width="350" height="350"/>
                                     <mask key="subviews">
                                         <include reference="iZy-ob-P2J"/>
                                         <include reference="isk-HW-IWt"/>
@@ -1233,6 +1237,62 @@
             </objects>
             <point key="canvasLocation" x="1210.5" y="1284"/>
         </scene>
+        <!--Map View Controller-->
+        <scene sceneID="ld6-6O-R4W">
+            <objects>
+                <viewController id="Zg4-Xd-IbW" customClass="MapViewController" customModule="vyse" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uK1-kz-1WY"/>
+                        <viewControllerLayoutGuide type="bottom" id="Oag-vm-3RP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="glz-At-pel">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="l2g-ih-w7u">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Zg4-Xd-IbW" id="UfR-UZ-iOq"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Oag-vm-3RP" firstAttribute="top" secondItem="l2g-ih-w7u" secondAttribute="bottom" id="2Xa-1d-lFU"/>
+                            <constraint firstAttribute="trailing" secondItem="l2g-ih-w7u" secondAttribute="trailing" id="8h8-qI-TgE"/>
+                            <constraint firstItem="l2g-ih-w7u" firstAttribute="leading" secondItem="glz-At-pel" secondAttribute="leading" id="AXh-SK-bYh"/>
+                            <constraint firstItem="l2g-ih-w7u" firstAttribute="top" secondItem="glz-At-pel" secondAttribute="top" id="a4u-nX-wLE"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="l2g-ih-w7u"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="8h8-qI-TgE"/>
+                                <exclude reference="AXh-SK-bYh"/>
+                                <exclude reference="a4u-nX-wLE"/>
+                                <exclude reference="2Xa-1d-lFU"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="l2g-ih-w7u"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="8h8-qI-TgE"/>
+                                <include reference="AXh-SK-bYh"/>
+                                <include reference="a4u-nX-wLE"/>
+                                <include reference="2Xa-1d-lFU"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="l2g-ih-w7u" id="s2d-8d-pBi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x0m-cN-5UC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2071.5" y="1284"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Lamb.jpg" width="1698" height="1131"/>
@@ -1252,7 +1312,7 @@
         <image name="thumb_up_filled-50.png" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="HtD-8B-l0s"/>
         <segue reference="t5d-ax-5kG"/>
+        <segue reference="veD-1g-XwN"/>
     </inferredMetricsTieBreakers>
 </document>

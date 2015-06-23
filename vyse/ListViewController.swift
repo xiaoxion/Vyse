@@ -12,7 +12,11 @@ import SwiftyJSON
 class ListViewController: UITableViewController {
     override func viewDidLoad() {
         if sharedFoursquareProcesses.retrieveFromList || sharedFoursquareProcesses.retrieveFromLocal {
-            
+            var theTitle = "Favorited"
+            if sharedFoursquareProcesses.saveHeader {
+                theTitle = "Saved for Later"
+            }
+            self.title = theTitle
         }
     }
     
@@ -51,7 +55,7 @@ class ListViewController: UITableViewController {
             cell.subLabel.text = ""
         } else if sharedFoursquareProcesses.retrieveFromLocal {
             if let venuePhoto = sharedFoursquareProcesses.venues[indexPath.row]["venue"]["bestPhoto"].dictionary {
-                var imageString = venuePhoto["prefix"]!.string! + "300x198" + venuePhoto["suffix"]!.string!
+                var imageString = venuePhoto["prefix"]!.string! + "100x100" + venuePhoto["suffix"]!.string!
                 let url = NSURL(string: imageString)
                 
                 getDataFromUrl(url!) { data in

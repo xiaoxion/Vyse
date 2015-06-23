@@ -22,6 +22,7 @@ class FoursquareProccesses {
     var favoriteID: String!
     var retrieveFromList = false
     var retrieveFromLocal = false
+    var saveHeader = false
 
     func getData(parameters: Parameters, isSearching: Bool) {
         currentTask?.cancel()
