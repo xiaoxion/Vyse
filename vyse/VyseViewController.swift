@@ -48,6 +48,8 @@ class VyseViewController:UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         if sharedFoursquareProcesses.indexedPath != nil {
             sharedFoursquareProcesses.currentValue = sharedFoursquareProcesses.indexedPath
+        } else {
+            sharedFoursquareProcesses.currentValue = 0
         }
         
         var data = NSMutableDictionary(contentsOfFile: NSBundle.mainBundle().pathForResource("Data", ofType: "plist")!)
@@ -162,12 +164,12 @@ class VyseViewController:UIViewController, UITextViewDelegate {
     
     // Add Data to Views
     func fillData() {
-        let objectVenue: JSON? = sharedFoursquareProcesses.venues[sharedFoursquareProcesses.currentValue]["venue"]
+        favoriteButton.setImage(UIImage(named: "like-50.png"), forState: UIControlState.Normal)
+        saveButton.setImage(UIImage(named: "save_as-50.png"), forState: UIControlState.Normal)
+        addSaved = true
+        addFavorite = true
         
-        if sharedFoursquareProcesses.retrieveFromList || sharedFoursquareProcesses.retrieveFromLocal {
-            favoriteButton.hidden = true
-            saveButton.hidden = true
-        }
+        let objectVenue: JSON? = sharedFoursquareProcesses.venues[sharedFoursquareProcesses.currentValue]["venue"]
         
         // Get Image
         if sharedFoursquareProcesses.retrieveFromList {
@@ -303,13 +305,19 @@ class VyseViewController:UIViewController, UITextViewDelegate {
         
         foodType.text = categoryInfo
         
+        // Set Venue ID
+        venueID = objectVenue?["id"].string
+        
+        
         // Check if locale is socailly approved
         if sharedFoursquareProcesses.checkAuthorized() {
             if let reason = sharedFoursquareProcesses.venues[sharedFoursquareProcesses.currentValue]["reasons"]["items"][0].dictionary {
-                if reason["type"]!.stringValue == "social" {
-                    outlineImage.image = UIImage(named: "VyseFriendOutline.png")
-                } else {
-                    outlineImage.image = UIImage(named: "VyseOutline.png")
+                if !tutorialNeededRight || !tutorialNeededUp {
+                    if reason["type"]!.stringValue == "social" {
+                        outlineImage.image = UIImage(named: "VyseFriendOutline.png")
+                    } else {
+                        outlineImage.image = UIImage(named: "VyseOutline.png")
+                    }
                 }
             }
             
@@ -320,9 +328,15 @@ class VyseViewController:UIViewController, UITextViewDelegate {
                 likedFoursquare = true
                 
             }
+        } else {
+            if sharedFileProcesses.check(true, id: venueID) {
+                saveButton.setImage(UIImage(named: "save_as_filled-50.png") , forState: UIControlState.Normal)
+                addSaved = false
+            } else if sharedFileProcesses.check(false, id: venueID) {
+                favoriteButton.setImage(UIImage(named: "like_filled-50.png"), forState: UIControlState.Normal)
+                addFavorite = false
+            }
         }
-        
-        venueID = objectVenue?["id"].string
     }
     
     // Get Image
@@ -371,13 +385,35 @@ class VyseViewController:UIViewController, UITextViewDelegate {
                     JLToast.makeText("Cannot Favorite if Saved").show()
                     return
                 }
-                sharedFoursquareProcesses.addRemoveGet(false, adding:addFavorite, saving: false, venueID: venueID)
+                
+                if sharedFoursquareProcesses.checkAuthorized() || addFavorite {
+                    sharedFoursquareProcesses.addRemoveGet(false, adding:addFavorite, saving: false, venueID: venueID)
+                } else {
+                    if sharedFileProcesses.remove(false) {
+                        JLToast.makeText("Removed").show()
+                        favoriteButton.setImage(UIImage(named: "like-50.png"), forState: UIControlState.Normal)
+                        addFavorite = true
+                    } else {
+                        JLToast.makeText("Error Removing").show()
+                    }
+                }
             } else if button!.tag == 1 {
                 if !addFavorite && addSaved {
                     JLToast.makeText("Cannot Save if Favorited").show()
                     return
                 }
-                sharedFoursquareProcesses.addRemoveGet(false, adding:addSaved, saving: true, venueID: venueID)
+                
+                if sharedFoursquareProcesses.checkAuthorized() || addSaved {
+                    sharedFoursquareProcesses.addRemoveGet(false, adding:addSaved, saving: true, venueID: venueID)
+                } else {
+                    if sharedFileProcesses.remove(true) {
+                        JLToast.makeText("Removed!").show()
+                        saveButton.setImage(UIImage(named: "save_as-50.png"), forState: UIControlState.Normal)
+                        addSaved = true
+                    } else {
+                        JLToast.makeText("Error Removing").show()
+                    }
+                }
             }
             
             // Getting Data

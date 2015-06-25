@@ -12,8 +12,7 @@ import SwiftyJSON
 import JLToast
 
 class FileProcesses {
-    var simlifiedVenues: [JSON]?
-    
+    var removeInt = 0
     let saveFile = "saved.json"
     let favoriteFile = "favorites.json"
     let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
@@ -21,9 +20,9 @@ class FileProcesses {
     // File Logic
     func exists(saving: Bool) -> Bool {
         if saving {
-            return NSFileManager().fileExistsAtPath(documentsPath + saveFile)
+            return NSFileManager().fileExistsAtPath(documentsPath + "/" + saveFile)
         } else {
-            return NSFileManager().fileExistsAtPath(documentsPath + favoriteFile)
+            return NSFileManager().fileExistsAtPath(documentsPath + "/" + favoriteFile)
         }
     }
     
@@ -34,14 +33,14 @@ class FileProcesses {
         }
         
         if self.exists(saving) {
-            var venueArray = [JSON(data: NSData(contentsOfFile: documentsPath + file)!, options: nil, error: nil)]
-            if venueArray == [] {
+            var venueArray = [JSON(data: NSData(contentsOfFile: documentsPath + "/" + file)!, options: nil, error: nil)]
+            if venueArray == [] || venueArray[0].count == 0 {
                 JLToast.makeText("Nothing to Show!").show()
                 return
             }
             
             var daInteger = 0
-            var counter = venueArray[0].count - 1
+            var counter = venueArray[0].count
             var tempArray = [JSON]()
             for venue in venueArray[0].arrayValue {
                 var task = sharedFoursquareProcesses.session.venues.get(venue["id"].stringValue) {
@@ -76,7 +75,7 @@ class FileProcesses {
             file = saveFile
         }
         
-        return JSON(data: NSData(contentsOfFile: (documentsPath + file))!, options: NSJSONReadingOptions.AllowFragments, error: nil)
+        return JSON(data: NSData(contentsOfFile: (documentsPath + "/" + file))!, options: nil, error: nil)
     }
     
     func write(saving: Bool, content: String, encoding: NSStringEncoding = NSUTF8StringEncoding) -> Bool {
@@ -93,7 +92,38 @@ class FileProcesses {
             save = saveFile
         }
         
-        NSFileManager.defaultManager().removeItemAtPath(documentsPath + save, error: nil)
+        NSFileManager.defaultManager().removeItemAtPath(documentsPath + "/" + save, error: nil)
+    }
+    
+    func check(saving: Bool, id: String) -> Bool {
+        if exists(saving) {
+            if let jsonToCheck = read(saving) {
+                var removalInt = 0
+                for venue in jsonToCheck.arrayValue {
+                    if venue["id"].stringValue == id {
+                        removeInt = removalInt
+                        return true
+                    }
+                    
+                    removalInt++
+                }
+                return false
+            } else {
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+    
+    func remove(saving: Bool) -> Bool {
+        if let jsonToRemove = read(saving) {
+            var mutableJSON = jsonToRemove.arrayValue
+            mutableJSON.removeAtIndex(removeInt)
+            
+            return write(saving, content: mutableJSON.description, encoding: NSUTF8StringEncoding)
+        }
+        return false
     }
 }
 

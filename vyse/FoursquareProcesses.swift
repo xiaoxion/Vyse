@@ -259,26 +259,29 @@ class FoursquareProccesses {
                 }
             } else {
                 var daID: JSON  = ["id": venueID!]
-                
+                var daJSON: [JSON] = []
+                var controller = callingViewController as! VyseViewController
                 if sharedFileProcesses.exists(saving) {
                     if let JSONObject = sharedFileProcesses.read(saving) {
                         var mutableJSON = JSONObject.arrayValue
                         mutableJSON.append(daID)
-                        var daData = mutableJSON.description
-                        
-                        if sharedFileProcesses.write(saving, content: mutableJSON.description, encoding: NSUTF8StringEncoding) {
-                            JLToast.makeText("Saved!").show()
-                        } else {
-                            JLToast.makeText("Error Saving").show()
-                        }
+                        daJSON = mutableJSON
                     }
                 } else {
-                    var daJSON = [daID]
-                    if sharedFileProcesses.write(saving, content: daJSON.description, encoding: NSUTF8StringEncoding) {
-                        JLToast.makeText("Saved!").show()
+                    daJSON = [daID]
+                }
+                
+                if sharedFileProcesses.write(saving, content: daJSON.description, encoding: NSUTF8StringEncoding) {
+                    JLToast.makeText("Saved!").show()
+                    if saving {
+                        controller.saveButton.setImage(UIImage(named: "save_as_filled-50.png"), forState: UIControlState.Normal)
+                        controller.addSaved = false
                     } else {
-                        JLToast.makeText("Error Saving").show()
+                        controller.favoriteButton.setImage(UIImage(named: "like_filled-50.png"), forState: UIControlState.Normal)
+                        controller.addFavorite = false
                     }
+                } else {
+                    JLToast.makeText("Error Saving").show()
                 }
             }
         }
@@ -300,15 +303,14 @@ class FoursquareProccesses {
             }
             
             for dataVenue in data!.array! {
-                var task = sharedFoursquareProcesses.session.lists.additem(listID, parameters: [Parameter.venueId: dataVenue["id"].stringValue], completionHandler: nil)
-                
-                task.start()
-                
                 if daInteger == counter {
                     sharedFileProcesses.delete(saving)
                     return
                 }
                 
+                var task = sharedFoursquareProcesses.session.lists.additem(listID, parameters: [Parameter.venueId: dataVenue["id"].stringValue], completionHandler: nil)
+                
+                task.start()
                 daInteger = daInteger + 1
             }
         }
