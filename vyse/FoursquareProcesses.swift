@@ -243,6 +243,8 @@ class FoursquareProccesses {
                         }
                     }
                 }
+                
+                // Starts the task
                 currentTask?.start()
             } else {
                 JLToast.makeText("Check Internet Connection!").show()
@@ -289,7 +291,7 @@ class FoursquareProccesses {
     
     func exportLocal(data:JSON?, saving: Bool) {
         var daInteger = 0
-        var counter = data!.array!.count - 1
+        var counter = data!.array!.count
         
         if counter == -1 {
             println("Nothing to Transfer")

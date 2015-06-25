@@ -228,6 +228,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 saved = true
             }
             sharedFoursquareProcesses.addRemoveGet(true, adding:nil, saving: saved, venueID: nil)
+            sharedFoursquareProcesses.saveHeader = saved
         }
         
         locationManager.stopUpdatingLocation()

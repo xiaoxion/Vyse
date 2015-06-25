@@ -62,7 +62,6 @@ class FileProcesses {
                     return
                 }
                 daInteger = daInteger + 1
-                
             }
         } else {
             JLToast.makeText("Nothing to Show!").show()

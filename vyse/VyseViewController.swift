@@ -169,6 +169,11 @@ class VyseViewController:UIViewController, UITextViewDelegate {
         addSaved = true
         addFavorite = true
         
+        if sharedFoursquareProcesses.retrieveFromList || sharedFoursquareProcesses.retrieveFromLocal {
+            favoriteButton.hidden = true
+            saveButton.hidden = true
+        }
+        
         let objectVenue: JSON? = sharedFoursquareProcesses.venues[sharedFoursquareProcesses.currentValue]["venue"]
         
         // Get Image
@@ -421,6 +426,7 @@ class VyseViewController:UIViewController, UITextViewDelegate {
                 sharedFoursquareProcesses.addRemoveGet(true, adding:nil, saving: false, venueID: nil)
             } else if button!.tag == 7 {
                 sharedFoursquareProcesses.addRemoveGet(true, adding:nil, saving: true, venueID: nil)
+                sharedFoursquareProcesses.saveHeader = true
             }
         } else {
             JLToast.makeText("Error, check internet connection!").show()

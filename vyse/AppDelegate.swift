@@ -21,7 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var configuration = Configuration(client:client)
         configuration.shouldControllNetworkActivityIndicator = true
         configuration.version = "20150612"
-        //configuration.mode = "foursquare"
         Session.setupSharedSessionWithConfiguration(configuration)
         
         return true
